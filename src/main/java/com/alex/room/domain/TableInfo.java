@@ -1,5 +1,7 @@
 package com.alex.room.domain;
 
+import com.alex.room.enums.Periods;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +16,18 @@ public class TableInfo {
     private Integer amountElem;
     private Integer percentFalse;
     private String dateNextRep;
+    private Integer periods;
+
+    public TableInfo() {
+    }
+
+    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String dateNextRep, Integer periods) {
+        this.number = number;
+        this.amountElem = amountElem;
+        this.percentFalse = percentFalse;
+        this.dateNextRep = dateNextRep;
+        this.periods = periods;
+    }
 
     public Integer getId() {
         return id;
@@ -53,5 +67,13 @@ public class TableInfo {
 
     public void setDateNextRep(String dateNextRep) {
         this.dateNextRep = dateNextRep;
+    }
+
+    public Integer getPeriods() {
+        return periods;
+    }
+
+    public void setPeriods(Integer periods) {
+        this.periods = periods;
     }
 }

@@ -1,5 +1,63 @@
-body {
-    background-image: url("../images/mainGroundTwo.jpg");
+#bodyMain {
+     background-image: url("../images/mainGroundFour.jpg");
+ }
+
+#bodyAndy {
+    background-image: url("../images/weiderKnuckle.png");
+    background-size: 100%;
+}
+
+#mainTable {
+    width: 55%;
+    margin-top: 10%;
+
+    border: 9px darkgreen solid;
+    border-radius: 30px;
+  /*  border-collapse: collapse;*/
+    border-spacing: 0;
+}
+.bottSett {
+    border: 0px;
+}
+td {
+    border-bottom: 7px darkgreen solid;
+    background-color: darkgreen;
+}
+
+tr {
+    border-bottom: 7px darkgreen solid;
+    background-color: darkgreen;
+}
+
+.bordBottBreak {
+    border-bottom: 0px;
+}
+
+#mainFrameId {
+    width: 95%;
+    height: 235%;
+    background-image: url("../images/backGroundWeider.jpg");
+    background-size: 100%;
+}
+
+#tdFrame {
+    width: 75%;
+    border-left: 7px darkgreen solid;
+    border-right: 7px darkgreen solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: darkgreen;
+}
+
+button {
+
+}
+
+.buttons {
+    height: 45px;
+    width: 100%;
+    border-radius: 10px;
+    background: yellowgreen;
 }
 
 .addButton {
@@ -13,4 +71,19 @@ body {
     box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
     background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
     color: #a00;
+}
+/*new pages style*/
+
+.addNewInputs {
+    margin-left: 10%;
+}
+
+.addNewButton {
+    height: 45px;
+    width: 30%;
+    border-radius: 10px;
+    background: yellowgreen;
+    position: fixed;
+    right: 2%;
+    bottom: 2%;
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main page</title>
+    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
+</head>
+<body id="bodyMain">
+
+    <table id="mainTable" align="center">
+        <tr class="bordBottBreak">
+            <td>
+                <button type="button" class="buttons">InfoLearn</button><br>
+            </td>
+            <td id="tdFrame" class="bordBottBreak" rowspan="7" align="middle">
+                <iframe name="mainFrame" id="mainFrameId">Alternative text</iframe>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form target="mainFrame" action="/addNew" method="post">
+                    <button class="buttons">Add</button>
+                </form>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <form target="mainFrame" action="/again" method="post">
+                    <button class="buttons">Delete</button>
+                </form>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <form target="mainFrame" action="" method="post">
+                    <button class="buttons">Edit an element</button>
+                </form>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <form target="mainFrame" action="" method="post">
+                    <button class="buttons">List for repeating</button>
+                </form>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <form target="mainFrame" action="" method="post">
+                    <button class="buttons">Status</button>
+                </form>
+            </td>
+
+        </tr>
+        <tr>
+            <td class="bordBottBreak">
+                <form target="mainFrame" action="" method="post">
+                    <button class="buttons">Settings</button>
+                </form>
+            </td>
+
+        </tr>
+    </table>
+
+</body>
+</html>
