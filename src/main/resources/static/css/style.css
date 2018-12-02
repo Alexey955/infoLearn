@@ -74,7 +74,7 @@ button {
 }
 /*new pages style*/
 
-.addNewInputs {
+#addNewInputs {
     margin-left: 10%;
 }
 
@@ -86,4 +86,33 @@ button {
     position: fixed;
     right: 2%;
     bottom: 2%;
+}
+
+.delButton {
+    height: 45px;
+    width: 30%;
+    border-radius: 10px;
+    background: yellowgreen;
+    position: fixed;
+    left: 2%;
+    bottom: 2%
+}
+
+.delRadioForm {
+    position: fixed;
+    left: 2%;
+    bottom: 12%;
+}
+
+#inpInto {
+    position: fixed;
+    left: 50%;
+    top: 12%;
+    margin-right: 2px;
+    width: 20%;
+}
+
+#inpFrom {
+    width: 25%;
+    margin-right: 2px;
 }

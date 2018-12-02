@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Several Elements</title>
+    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
+</head>
+<body>
+    <h3 align="center">Delete several elements:</h3>
+    <form method="post" action="wallAftDelSeveral">
+        <div>
+            <div id="inpFrom">
+                <h4>Number from:</h4><input type="number" name="numberFieldFrom" required><br>
+            </div>
+            <div id="inpInto">
+                <h4>Number into:</h4><input type="number" name="numberFieldInto" required><br>
+            </div>
+        </div>
+        <button class="addNewButton">Delete</button>
+    </form>
+    <form method="post" action="delOneOrSeveral" class="delRadioForm">
+        <h4 >One element:<input type="radio" value="one" name="radioDel"></h4>
+        <h4>Several elements:<input type="radio" value="several" name="radioDel" checked></h4>
+        <button class="delButton">Change</button>
+    </form>
+</body>
+</html>

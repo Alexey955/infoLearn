@@ -50,8 +50,40 @@ public class MainController {
         return "wallpaperPage";
     }
 
-    @PostMapping("/again")
-    public String againFun() {
+    @PostMapping("/delElem")
+    public String delAnElem() {
+        return "deleteElemPage";
+    }
+
+    @PostMapping("/wallAftDelOne")
+    public String wallAftOneDel(@RequestParam Integer numberField) {
+        int num = tableInfoRepo.findByNumber(numberField).getId();
+        tableInfoRepo.deleteById(num);
         return "wallpaperPage";
     }
+
+    @PostMapping("/delOneOrSeveral")
+    public String pickDelOneOrSeveral(@RequestParam String radioDel) {
+        if(radioDel.equals("one")) {
+            return "deleteElemPage";
+        } else {
+            return "deleteSeveralElemPage";
+        }
+    }
+
+    @PostMapping("/delSeveralElem")
+    public String delSeveralElements() {
+        return "deleteSeveralElemPage";
+    }
+    @PostMapping("/wallAftDelSeveral")
+    public String wallAftDelSeveral(@RequestParam Integer numberFieldFrom, @RequestParam Integer numberFieldInto) {
+        int num;
+        for(int i = numberFieldFrom; i != numberFieldInto +1; i++) {
+            num = tableInfoRepo.findByNumber(i).getId();
+            tableInfoRepo.deleteById(num);
+        }
+
+        return "wallpaperPage";
+    }
+
 }
