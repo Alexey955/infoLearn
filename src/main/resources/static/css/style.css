@@ -15,16 +15,13 @@
     border-radius: 30px;
   /*  border-collapse: collapse;*/
     border-spacing: 0;
+
 }
 .bottSett {
     border: 0px;
 }
-td {
-    border-bottom: 7px darkgreen solid;
-    background-color: darkgreen;
-}
 
-tr {
+.trMainTable {
     border-bottom: 7px darkgreen solid;
     background-color: darkgreen;
 }
@@ -57,7 +54,7 @@ tr {
 }
 /*new pages style*/
 
-#addNewInputs {
+.addNewInputs {
     margin-left: 10%;
 }
 
@@ -112,4 +109,16 @@ tr {
 
 .ElemRepeatInp {
     width: 40%;
+}
+
+.editPageTable {
+
+}
+
+.inpEditPage {
+    width: 70%;
+}
+
+.editAndDelInp {
+    width: 20%;
 }

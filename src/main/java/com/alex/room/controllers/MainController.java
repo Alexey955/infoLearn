@@ -5,14 +5,13 @@ import com.alex.room.enums.Periods;
 import com.alex.room.repos.TableInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
+@SessionAttributes("numberElement")
 public class MainController {
 
     @Autowired
@@ -57,8 +56,8 @@ public class MainController {
 
     @PostMapping("/wallAftDelOne")
     public String wallAftOneDel(@RequestParam Integer numberField) {
-        int num = tableInfoRepo.findByNumber(numberField).getId();
-        tableInfoRepo.deleteById(num);
+        int numTableInfo = tableInfoRepo.findByNumber(numberField).getId();
+        tableInfoRepo.deleteById(numTableInfo);
         return "wallpaperPage";
     }
 
@@ -77,10 +76,10 @@ public class MainController {
     }
     @PostMapping("/wallAftDelSeveral")
     public String wallAftDelSeveral(@RequestParam Integer numberFieldFrom, @RequestParam Integer numberFieldInto) {
-        int num;
+        int numTableInfo;
         for(int i = numberFieldFrom; i != numberFieldInto +1; i++) {
-            num = tableInfoRepo.findByNumber(i).getId();
-            tableInfoRepo.deleteById(num);
+            numTableInfo = tableInfoRepo.findByNumber(i).getId();
+            tableInfoRepo.deleteById(numTableInfo);
         }
         return "wallpaperPage";
     }
@@ -131,9 +130,41 @@ public class MainController {
         TableInfo tableInfoNew = new TableInfo(tableInfoOld.getNumber(), tableInfoOld.getAmountElem(),
                 percentFalse, strDatePriorRep, strNextDateRep,  tableInfoOld.getStage() + 1);
 
-        int num = tableInfoRepo.findByNumber(inputNum).getId();
-        tableInfoRepo.deleteById(num);
+        int numTableInfo = tableInfoRepo.findByNumber(inputNum).getId();
+        tableInfoRepo.deleteById(numTableInfo);
         tableInfoRepo.save(tableInfoNew);
+        return "wallpaperPage";
+    }
+
+    @GetMapping("/pickElemForEdit")
+    public String pickElemForEdit() {
+        return "pickElemForEditPage";
+    }
+
+    @GetMapping("/editElem")
+    public String getEditElemPage(@RequestParam Integer numberField, Map<String, Object> model) {
+        TableInfo tableInfo = tableInfoRepo.findByNumber(numberField);
+        model.put("DateForPrompt", tableInfo);
+
+        int qualityFails = (tableInfo.getPercentFalse()/tableInfo.getAmountElem());
+        model.put("qualityFails", qualityFails);
+        model.put("numberElement", numberField);
+        return "editElemPage";
+    }
+
+    @PostMapping("/wallAftEdit")
+    public String wallAftEdit(@RequestParam Integer thesesField, @RequestParam String priorDateField,
+                              @RequestParam Integer mistakesField, @RequestParam String nextRepDateField,
+                              @RequestParam Integer inpStage, @ModelAttribute("numberElement") Integer numberField) {
+      //  Integer numberFieldInt = Integer.parseInt(numberField);
+        int percentFalse = (mistakesField*100)/thesesField;
+        TableInfo tableInfo = new TableInfo(numberField, thesesField, percentFalse,
+                priorDateField, nextRepDateField, inpStage);
+
+        int numTableInfo = tableInfoRepo.findByNumber(numberField).getId();
+        tableInfoRepo.deleteById(numTableInfo);
+
+        tableInfoRepo.save(tableInfo);
         return "wallpaperPage";
     }
 }

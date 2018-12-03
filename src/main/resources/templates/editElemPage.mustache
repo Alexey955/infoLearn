@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit An Element Page.</title>
+    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
+</head>
+<body>
+    <h3 align="center">Edit an element:</h3>
+    <!--<form method="post" action="wallAftEdit">
+        <div class="addNewInputs">
+            <h4>Number</h4><input type="number" name="inpNumber" required>
+            <h4>Amount of theses:</h4><input type="number" name="thesesField" required><br>
+            <h4>Quantity of mistakes:</h4><input type="number" name="mistakesField" required><br>
+            <h4>Previous repeat date:</h4><input type="date" name="priorDateField" required><br>
+            <h4>Next repeat date:</h4><input type="date" name="nextRepDateField" required><br>
+        </div>
+        <button class="addNewButton">Edit</button>
+    </form>-->
+    <form method="post" action="wallAftEdit">
+        <table id="editPageTable" align="center">
+            {{#DateForPrompt}}
+            <tr>
+                <td>
+                    <h4>Amount of theses:</h4><input type="number" name="thesesField" class="inpEditPage"
+                                                     placeholder={{amountElem}} required><br>
+                </td>
+                <td>
+                    <h4>Previous repeat date:</h4><input type="text" name="priorDateField"
+                                                         placeholder={{datePriorRep}} required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{#qualityFails}}
+                    <h4>Quantity of mistakes:</h4><input type="number" name="mistakesField" class="inpEditPage"
+                                                         placeholder={{qualityFails}} required><br>
+                    {{/qualityFails}}
+                </td>
+                <td>
+                    <h4>Next repeat date:</h4><input type="text" name="nextRepDateField"
+                                                     placeholder={{dateNextRep}} required><br>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h4>Stage:</h4><input type="number" name="inpStage" class="inpEditPage"
+                                          placeholder={{stage}} required>
+                </td>
+            </tr>
+            {{/DateForPrompt}}
+        </table>
+        <button class="addNewButton">Edit</button>
+    </form>
+
+</body>
+</html>

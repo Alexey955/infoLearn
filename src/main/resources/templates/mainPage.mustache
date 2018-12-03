@@ -7,7 +7,7 @@
 <body id="bodyMain">
 
     <table id="mainTable" align="center">
-        <tr class="bordBottBreak">
+        <tr class="bordBottBreak trMainTable">
             <td>
                 <button type="button" class="buttons">InfoLearn</button><br>
             </td>
@@ -15,14 +15,14 @@
                 <iframe name="mainFrame" id="mainFrameId">Alternative text</iframe>
             </td>
         </tr>
-        <tr>
+        <tr class="trMainTable">
             <td>
                 <form target="mainFrame" action="/addNew" method="post">
                     <button class="buttons">Add</button>
                 </form>
             </td>
         </tr>
-        <tr>
+        <tr class="trMainTable">
             <td>
                 <form target="mainFrame" action="/delElem" method="post">
                     <button class="buttons">Delete</button>
@@ -30,28 +30,28 @@
             </td>
 
         </tr>
-        <tr>
+        <tr class="trMainTable">
             <td>
-                <form target="mainFrame" action="" method="post">
+                <form target="mainFrame" action="/pickElemForEdit" method="get">
                     <button class="buttons">Edit an element</button>
                 </form>
             </td>
         </tr>
-        <tr>
+        <tr class="trMainTable">
             <td>
                 <form target="mainFrame" action="/listRep" method="get">
                     <button class="buttons">List for repeating</button>
                 </form>
             </td>
         </tr>
-        <tr>
+        <tr class="trMainTable">
             <td>
                 <form target="mainFrame" action="" method="post">
                     <button class="buttons">Status</button>
                 </form>
             </td>
         </tr>
-        <tr>
+        <tr class="trMainTable">
             <td class="bordBottBreak">
                 <form target="mainFrame" action="" method="post">
                     <button class="buttons">Settings</button>
