@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class MainController {
@@ -34,7 +32,10 @@ public class MainController {
     public String wallAftAdd(@RequestParam Integer numberField, @RequestParam Integer thesesField,
                              @RequestParam Integer mistakesField, Map<String, Object> model) {
         Date nowadays = new Date();
+        Date datePriorRep = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        String strDatePriorRep = simpleDateFormat.format(datePriorRep);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(nowadays);
         calendar.add(Calendar.DAY_OF_MONTH, Periods.Two.getDayAmount());
@@ -43,8 +44,7 @@ public class MainController {
 
         int percentMistakes = (mistakesField*100)/thesesField;
 
-        TableInfo tableInfo = new TableInfo(numberField, thesesField, percentMistakes, strNextDateRep, 1);
-
+        TableInfo tableInfo = new TableInfo(numberField, thesesField, percentMistakes, strDatePriorRep, strNextDateRep, 1);
         tableInfoRepo.save(tableInfo);
 
         return "wallpaperPage";
@@ -82,8 +82,58 @@ public class MainController {
             num = tableInfoRepo.findByNumber(i).getId();
             tableInfoRepo.deleteById(num);
         }
-
         return "wallpaperPage";
     }
 
+    @GetMapping("/listRep")
+    public String showListRep(Map<String, Object> model) {
+        Date nowadays = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String strNowadaysSimple = simpleDateFormat.format(nowadays);
+        Iterable<TableInfo> tableInfoList = tableInfoRepo.findByDateNextRep(strNowadaysSimple);
+
+        model.put("listRep", tableInfoList);
+        return "repeatListPage";
+    }
+
+    @GetMapping("/pickElemRepeat")
+    public String pickElemRepeat(Map<String, Object> model) {
+        Date nowadays = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String strNowadaysSimple = simpleDateFormat.format(nowadays);
+        Iterable<TableInfo> tableInfoList = tableInfoRepo.findByDateNextRep(strNowadaysSimple);
+
+        model.put("listRep", tableInfoList);
+        return "pickElemRepeatPage";
+    }
+
+    @PostMapping("/wallAftRepeatSeveral")
+    public String wallAftRepeatSeveral(@RequestParam Integer inputNum, @RequestParam Integer inputMistakes) {
+        TableInfo tableInfoOld = tableInfoRepo.findByNumber(inputNum);
+
+        int percentFalse = (inputMistakes * 100)/tableInfoOld.getAmountElem();
+
+        Date nowadays = new Date();
+        Date datePriorRep = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        String strDatePriorRep = simpleDateFormat.format(datePriorRep);
+
+        Periods periods[] = Periods.values();
+        Integer amountDaysToAdd = periods[tableInfoOld.getStage() + 1].getDayAmount();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(nowadays);
+        calendar.add(Calendar.DAY_OF_MONTH, amountDaysToAdd);
+        nowadays = calendar.getTime();
+        String strNextDateRep = simpleDateFormat.format(nowadays);
+
+
+        TableInfo tableInfoNew = new TableInfo(tableInfoOld.getNumber(), tableInfoOld.getAmountElem(),
+                percentFalse, strDatePriorRep, strNextDateRep,  tableInfoOld.getStage() + 1);
+
+        int num = tableInfoRepo.findByNumber(inputNum).getId();
+        tableInfoRepo.deleteById(num);
+        tableInfoRepo.save(tableInfoNew);
+        return "wallpaperPage";
+    }
 }

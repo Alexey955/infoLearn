@@ -15,18 +15,20 @@ public class TableInfo {
     private Integer number;
     private Integer amountElem;
     private Integer percentFalse;
+    private String datePriorRep;
     private String dateNextRep;
-    private Integer periods;
+    private Integer stage;
 
     public TableInfo() {
     }
 
-    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String dateNextRep, Integer periods) {
+    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String datePriorRep, String dateNextRep, Integer stage) {
         this.number = number;
         this.amountElem = amountElem;
         this.percentFalse = percentFalse;
+        this.datePriorRep = datePriorRep;
         this.dateNextRep = dateNextRep;
-        this.periods = periods;
+        this.stage = stage;
     }
 
     public Integer getId() {
@@ -69,11 +71,19 @@ public class TableInfo {
         this.dateNextRep = dateNextRep;
     }
 
-    public Integer getPeriods() {
-        return periods;
+    public Integer getStage() {
+        return stage;
     }
 
-    public void setPeriods(Integer periods) {
-        this.periods = periods;
+    public void setStage(Integer stage) {
+        this.stage = stage;
+    }
+
+    public String getDatePriorRep() {
+        return datePriorRep;
+    }
+
+    public void setDatePriorRep(String datePriorRep) {
+        this.datePriorRep = datePriorRep;
     }
 }

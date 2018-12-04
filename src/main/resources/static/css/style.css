@@ -8,7 +8,7 @@
 }
 
 #mainTable {
-    width: 55%;
+    width: 60%;
     margin-top: 10%;
 
     border: 9px darkgreen solid;
@@ -49,28 +49,11 @@ tr {
     background-color: darkgreen;
 }
 
-button {
-
-}
-
 .buttons {
     height: 45px;
     width: 100%;
     border-radius: 10px;
     background: yellowgreen;
-}
-
-.addButton {
-    border: 1px solid #333; /* Рамка */
-    display: inline-block;
-    padding: 5px 15px; /* Поля */
-    text-decoration: none; /* Убираем подчёркивание */
-    color: #000; /* Цвет текста */
-}
-.addButton:hover {
-    box-shadow: 0 0 5px rgba(0,0,0,0.3); /* Тень */
-    background: linear-gradient(to bottom, #fcfff4, #e9e9ce); /* Градиент */
-    color: #a00;
 }
 /*new pages style*/
 
@@ -80,7 +63,7 @@ button {
 
 .addNewButton {
     height: 45px;
-    width: 30%;
+    width: 17%;
     border-radius: 10px;
     background: yellowgreen;
     position: fixed;
@@ -106,13 +89,27 @@ button {
 
 #inpInto {
     position: fixed;
-    left: 50%;
+    left: 30%;
     top: 12%;
     margin-right: 2px;
-    width: 20%;
+    width: 25%;
 }
 
 #inpFrom {
     width: 25%;
     margin-right: 2px;
+}
+
+.inpDelWidth {
+    width: 87%;
+}
+
+#pickElemRepeatInp {
+    position: fixed;
+    bottom: 2%;
+    left: 65%;
+}
+
+.ElemRepeatInp {
+    width: 40%;
 }
