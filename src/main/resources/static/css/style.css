@@ -1,4 +1,4 @@
-#bodyMain {
+.bodyMain {
      background-image: url("../images/mainGroundFour.jpg");
  }
 
@@ -7,7 +7,7 @@
     background-size: 100%;
 }
 
-#mainTable {
+.mainTable {
     width: 60%;
     margin-top: 10%;
 
@@ -121,4 +121,10 @@
 
 .editAndDelInp {
     width: 20%;
+}
+
+#AVGAccuracyText {
+    position: absolute;
+    top: 35%;
+    left: 30%;
 }

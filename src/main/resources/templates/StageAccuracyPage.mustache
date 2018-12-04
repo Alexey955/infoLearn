@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stage Accuracy Page</title>
+    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
+</head>
+<body>
+    <h3 align="center">Stage accuracy:</h3>
+
+    {{#GroupByStage}}
+    <div>
+        There are {{1}} elements in the {{0}} stage, average accuracy is {{2}}%.
+    </div>
+    {{/GroupByStage}}
+</body>
+</html>

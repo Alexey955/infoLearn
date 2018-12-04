@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -29,7 +30,7 @@ public class MainController {
 
     @PostMapping("/wallAftAdd")
     public String wallAftAdd(@RequestParam Integer numberField, @RequestParam Integer thesesField,
-                             @RequestParam Integer mistakesField, Map<String, Object> model) {
+                             @RequestParam Integer mistakesField, Map<String, Object> model) throws ParseException {
         Date nowadays = new Date();
         Date datePriorRep = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -87,11 +88,9 @@ public class MainController {
     @GetMapping("/listRep")
     public String showListRep(Map<String, Object> model) {
         Date nowadays = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        String strNowadaysSimple = simpleDateFormat.format(nowadays);
-        Iterable<TableInfo> tableInfoList = tableInfoRepo.findByDateNextRep(strNowadaysSimple);
+        Iterable<TableInfo> tableInfoIterableAll = tableInfoRepo.findByTypeDateNextRepIsLessThanEqual(nowadays);
 
-        model.put("listRep", tableInfoList);
+        model.put("listRep", tableInfoIterableAll);
         return "repeatListPage";
     }
 
@@ -107,7 +106,7 @@ public class MainController {
     }
 
     @PostMapping("/wallAftRepeatSeveral")
-    public String wallAftRepeatSeveral(@RequestParam Integer inputNum, @RequestParam Integer inputMistakes) {
+    public String wallAftRepeatSeveral(@RequestParam Integer inputNum, @RequestParam Integer inputMistakes) throws ParseException {
         TableInfo tableInfoOld = tableInfoRepo.findByNumber(inputNum);
 
         int percentFalse = (inputMistakes * 100)/tableInfoOld.getAmountElem();
@@ -126,13 +125,13 @@ public class MainController {
         nowadays = calendar.getTime();
         String strNextDateRep = simpleDateFormat.format(nowadays);
 
-
         TableInfo tableInfoNew = new TableInfo(tableInfoOld.getNumber(), tableInfoOld.getAmountElem(),
                 percentFalse, strDatePriorRep, strNextDateRep,  tableInfoOld.getStage() + 1);
 
         int numTableInfo = tableInfoRepo.findByNumber(inputNum).getId();
         tableInfoRepo.deleteById(numTableInfo);
         tableInfoRepo.save(tableInfoNew);
+
         return "wallpaperPage";
     }
 
@@ -155,8 +154,7 @@ public class MainController {
     @PostMapping("/wallAftEdit")
     public String wallAftEdit(@RequestParam Integer thesesField, @RequestParam String priorDateField,
                               @RequestParam Integer mistakesField, @RequestParam String nextRepDateField,
-                              @RequestParam Integer inpStage, @ModelAttribute("numberElement") Integer numberField) {
-      //  Integer numberFieldInt = Integer.parseInt(numberField);
+                              @RequestParam Integer inpStage, @ModelAttribute("numberElement") Integer numberField) throws ParseException {
         int percentFalse = (mistakesField*100)/thesesField;
         TableInfo tableInfo = new TableInfo(numberField, thesesField, percentFalse,
                 priorDateField, nextRepDateField, inpStage);

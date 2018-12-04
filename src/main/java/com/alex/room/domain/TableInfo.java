@@ -1,11 +1,12 @@
 package com.alex.room.domain;
 
-import com.alex.room.enums.Periods;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity
 public class TableInfo {
@@ -17,18 +18,30 @@ public class TableInfo {
     private Integer percentFalse;
     private String datePriorRep;
     private String dateNextRep;
+    private Date typeDatePriorRep;
+    private Date typeDateNextRep;
     private Integer stage;
 
     public TableInfo() {
     }
 
-    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String datePriorRep, String dateNextRep, Integer stage) {
+    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String datePriorRep, String dateNextRep, Integer stage) throws ParseException {
         this.number = number;
         this.amountElem = amountElem;
         this.percentFalse = percentFalse;
         this.datePriorRep = datePriorRep;
         this.dateNextRep = dateNextRep;
         this.stage = stage;
+
+        Date dateForConver;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
+        dateForConver = simpleDateFormat.parse(datePriorRep);
+        this.typeDatePriorRep = dateForConver;
+
+        dateForConver = simpleDateFormat.parse(dateNextRep);
+        this.typeDateNextRep = dateForConver;
+
     }
 
     public Integer getId() {
@@ -85,5 +98,21 @@ public class TableInfo {
 
     public void setDatePriorRep(String datePriorRep) {
         this.datePriorRep = datePriorRep;
+    }
+
+    public Date getTypeDatePriorRep() {
+        return typeDatePriorRep;
+    }
+
+    public void setTypeDatePriorRep(Date typeDatePriorRep) {
+        this.typeDatePriorRep = typeDatePriorRep;
+    }
+
+    public Date getTypeDateNextRep() {
+        return typeDateNextRep;
+    }
+
+    public void setTypeDateNextRep(Date typeDateNextRep) {
+        this.typeDateNextRep = typeDateNextRep;
     }
 }
