@@ -21,17 +21,21 @@ public class TableInfo {
     private Date typeDatePriorRep;
     private Date typeDateNextRep;
     private Integer stage;
+    private String username;
 
     public TableInfo() {
     }
 
-    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String datePriorRep, String dateNextRep, Integer stage) throws ParseException {
+    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String datePriorRep,
+                     String dateNextRep, Integer stage, String username) throws ParseException {
+
         this.number = number;
         this.amountElem = amountElem;
         this.percentFalse = percentFalse;
         this.datePriorRep = datePriorRep;
         this.dateNextRep = dateNextRep;
         this.stage = stage;
+        this.username = username;
 
         Date dateForConver;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -114,5 +118,13 @@ public class TableInfo {
 
     public void setTypeDateNextRep(Date typeDateNextRep) {
         this.typeDateNextRep = typeDateNextRep;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String user) {
+        this.username = user;
     }
 }

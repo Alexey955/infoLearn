@@ -11,9 +11,10 @@
         <div class="addNewInputs">
             <h4>Number:</h4><input type="number" name="numberField" class="editAndDelInp" required>
         </div>
+        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
         <button class="addNewButton">Delete</button>
     </form>
-    <form method="post" action="delOneOrSeveral" class="delRadioForm">
+    <form method="get" action="delOneOrSeveral" class="delRadioForm">
             <h4 >One element:<input type="radio" value="one" name="radioDel" checked id="delRadio"></h4>
             <h4>Several elements:<input type="radio" value="several" name="radioDel"></h4>
         <button class="delButton">Change</button>

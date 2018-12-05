@@ -9,7 +9,10 @@
     <table class="mainTable" align="center">
         <tr class="bordBottBreak trMainTable">
             <td>
-                <button type="button" class="buttons">InfoLearn</button><br>
+                <form action="/logout" method="post">
+                    <input type="submit" value="Sign Out" class="buttons"/>
+                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                </form>
             </td>
             <td id="tdFrame" class="bordBottBreak" rowspan="7" align="middle">
                 <iframe name="mainFrame" id="mainFrameId">Alternative text</iframe>
@@ -17,14 +20,14 @@
         </tr>
         <tr class="trMainTable">
             <td>
-                <form target="mainFrame" action="/addNew" method="post">
+                <form target="mainFrame" action="/addNew" method="get" id="csrf-form">
                     <button class="buttons">Add</button>
                 </form>
             </td>
         </tr>
         <tr class="trMainTable">
             <td>
-                <form target="mainFrame" action="/delElem" method="post">
+                <form target="mainFrame" action="/delElem" method="get">
                     <button class="buttons">Delete</button>
                 </form>
             </td>

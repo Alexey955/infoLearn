@@ -1,9 +1,11 @@
 package com.alex.room.controllers;
 
 import com.alex.room.domain.TableInfo;
+import com.alex.room.domain.User;
 import com.alex.room.enums.Periods;
 import com.alex.room.repos.TableInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,14 +25,16 @@ public class MainController {
         return "mainPage";
     }
 
-    @PostMapping("/addNew")
+    @GetMapping("/addNew")
     public String addNewElem(Map<String, Object> model) {
         return "addNewElemPage";
     }
 
     @PostMapping("/wallAftAdd")
-    public String wallAftAdd(@RequestParam Integer numberField, @RequestParam Integer thesesField,
-                             @RequestParam Integer mistakesField, Map<String, Object> model) throws ParseException {
+    public String wallAftAdd(@AuthenticationPrincipal User user, @RequestParam Integer numberField,
+                             @RequestParam Integer thesesField, @RequestParam Integer mistakesField,
+                             Map<String, Object> model) throws ParseException {
+
         Date nowadays = new Date();
         Date datePriorRep = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -44,13 +48,14 @@ public class MainController {
 
         int percentMistakes = (mistakesField*100)/thesesField;
 
-        TableInfo tableInfo = new TableInfo(numberField, thesesField, percentMistakes, strDatePriorRep, strNextDateRep, 1);
+        TableInfo tableInfo = new TableInfo(numberField, thesesField, percentMistakes,
+                strDatePriorRep, strNextDateRep, 1, user.getUsername());
         tableInfoRepo.save(tableInfo);
 
         return "wallpaperPage";
     }
 
-    @PostMapping("/delElem")
+    @GetMapping("/delElem")
     public String delAnElem() {
         return "deleteElemPage";
     }
@@ -62,7 +67,7 @@ public class MainController {
         return "wallpaperPage";
     }
 
-    @PostMapping("/delOneOrSeveral")
+    @GetMapping("/delOneOrSeveral")
     public String pickDelOneOrSeveral(@RequestParam String radioDel) {
         if(radioDel.equals("one")) {
             return "deleteElemPage";
@@ -105,7 +110,7 @@ public class MainController {
         return "pickElemRepeatPage";
     }
 
-    @PostMapping("/wallAftRepeatSeveral")
+    @PostMapping("/wallAftRepeat")
     public String wallAftRepeatSeveral(@RequestParam Integer inputNum, @RequestParam Integer inputMistakes) throws ParseException {
         TableInfo tableInfoOld = tableInfoRepo.findByNumber(inputNum);
 
@@ -126,7 +131,7 @@ public class MainController {
         String strNextDateRep = simpleDateFormat.format(nowadays);
 
         TableInfo tableInfoNew = new TableInfo(tableInfoOld.getNumber(), tableInfoOld.getAmountElem(),
-                percentFalse, strDatePriorRep, strNextDateRep,  tableInfoOld.getStage() + 1);
+                percentFalse, strDatePriorRep, strNextDateRep,  tableInfoOld.getStage() + 1, tableInfoOld.getUsername());
 
         int numTableInfo = tableInfoRepo.findByNumber(inputNum).getId();
         tableInfoRepo.deleteById(numTableInfo);
@@ -156,11 +161,12 @@ public class MainController {
                               @RequestParam Integer mistakesField, @RequestParam String nextRepDateField,
                               @RequestParam Integer inpStage, @ModelAttribute("numberElement") Integer numberField) throws ParseException {
         int percentFalse = (mistakesField*100)/thesesField;
+        int idTableInfo = tableInfoRepo.findByNumber(numberField).getId();
+        String username = tableInfoRepo.findById(idTableInfo).get().getUsername();
         TableInfo tableInfo = new TableInfo(numberField, thesesField, percentFalse,
-                priorDateField, nextRepDateField, inpStage);
+                priorDateField, nextRepDateField, inpStage, username);
 
-        int numTableInfo = tableInfoRepo.findByNumber(numberField).getId();
-        tableInfoRepo.deleteById(numTableInfo);
+        tableInfoRepo.deleteById(idTableInfo);
 
         tableInfoRepo.save(tableInfo);
         return "wallpaperPage";

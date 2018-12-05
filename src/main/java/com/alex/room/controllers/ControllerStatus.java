@@ -87,6 +87,7 @@ public class ControllerStatus {
         }
         long avgAccuracy = allPercentFalse / allAmount;
         model.put("avgAccuracy", avgAccuracy);
+
         return "AVGAccuracyPage";
     }
 
