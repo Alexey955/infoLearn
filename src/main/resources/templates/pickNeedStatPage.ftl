@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Pick A Need Status Page</title>
-    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
-</head>
+<#import "parts/common.ftl" as c>
+
+<@c.page>
 <body class="bodyMain">
     <table class="mainTable" align="center">
         <tr class="bordBottBreak trMainTable">
@@ -59,4 +55,4 @@
         </tr>
     </table>
 </body>
-</html>
+</@c.page>

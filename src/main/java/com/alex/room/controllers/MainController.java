@@ -150,7 +150,7 @@ public class MainController {
         TableInfo tableInfo = tableInfoRepo.findByNumber(numberField);
         model.put("DateForPrompt", tableInfo);
 
-        int qualityFails = (tableInfo.getPercentFalse()/tableInfo.getAmountElem());
+        Integer qualityFails = (tableInfo.getPercentFalse()/tableInfo.getAmountElem());
         model.put("qualityFails", qualityFails);
         model.put("numberElement", numberField);
         return "editElemPage";

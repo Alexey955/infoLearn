@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login Page</title>
-    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
-</head>
+<#import "parts/common.ftl" as c>
+
+<@c.page>
 <body class="bodyMain">
 <div>
     <form id="loginForm" action="/login" method="post">
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
     </form>
     <form id="registrForm" action="/registration" method="get"></form>
 
@@ -25,4 +22,4 @@
         </table>
 </div>
 </body>
-</html>
+</@c.page>

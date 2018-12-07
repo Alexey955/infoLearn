@@ -21,10 +21,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!--Mustache using-->
+        <!--Freemarker using-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mustache</artifactId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
         <!--Increase efficiency-->
         <dependency>

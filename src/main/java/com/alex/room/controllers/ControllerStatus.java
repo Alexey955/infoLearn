@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class ControllerStatus {
@@ -65,27 +63,21 @@ public class ControllerStatus {
         }
         //stop to create a tail list
         model.put("DayListWithTail", listWithTail);
+        model.put("pickedDay", dayField);
 
-        if(((List<TableInfo>) listWithTail).isEmpty()) {
-            return "showDayListPage";
-        } else {
-            String pickedDay = ((List<TableInfo>) listWithTail).get(0).getDateNextRep();
-            model.put("pickedDay", pickedDay);
-
-            return "showDayListPage";
-        }
+        return "showDayListPage";
     }
 
     @GetMapping("/showAVGAccuracy")
     public String showAVGAccuracy(Map<String, Object> model) {
         Iterable<TableInfo> tableInfoIterable = tableInfoRepo.findAll();
-        long allAmount = tableInfoRepo.count();
+        int allAmount = (int) tableInfoRepo.count();
         int allPercentFalse = 0;
 
         for(TableInfo x: tableInfoIterable) {
             allPercentFalse += x.getPercentFalse();
         }
-        long avgAccuracy = allPercentFalse / allAmount;
+        Integer avgAccuracy = Math.toIntExact(allPercentFalse / allAmount);
         model.put("avgAccuracy", avgAccuracy);
 
         return "AVGAccuracyPage";
@@ -93,22 +85,18 @@ public class ControllerStatus {
 
     @GetMapping("/showStageAccuracy")
     public String showStageAccuracy(Map<String, Object> model) {
-        Iterable<TableInfo> tableInfoCount = tableInfoRepo.findTableInfoCount();
-        model.put("GroupByStage", tableInfoCount);
+        model.put("GroupByStage", tableInfoRepo.findTableInfoCount());
         return "StageAccuracyPage";
     }
 
     @GetMapping("/showElemInStages")
     public String showElemInStages(Map<String, Object> model) {
-        Iterable<TableInfo> tableInfoIterable;
-        Iterable<TableInfo> tableInfoToAdd;
+        List<TableInfo> tableInfoIterable = new ArrayList<>();
         Integer topStage = tableInfoRepo.findMaxStage();
-
-        tableInfoIterable = tableInfoRepo.findByStage(1);
+        tableInfoRepo.findAll().sort(Comparator.comparing(TableInfo::getStage).thenComparing(TableInfo::getNumber));
 
         for(int i = 2; i <= topStage; i++) {
-            tableInfoToAdd = tableInfoRepo.findByStage(i);
-            ((List<TableInfo>) tableInfoIterable).addAll( (List<TableInfo>) tableInfoToAdd);
+            tableInfoIterable.addAll( tableInfoRepo.findByStage(i));
         }
         model.put("ElemInStage", tableInfoIterable);
         return "ElemInStagesPage";

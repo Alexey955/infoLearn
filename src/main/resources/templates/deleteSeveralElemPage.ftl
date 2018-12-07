@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Several Elements</title>
-    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
-</head>
+<#import "parts/common.ftl" as c>
+
+<@c.page>
 <body>
     <h3 align="center">Delete several elements:</h3>
     <form method="post" action="wallAftDelSeveral">
@@ -16,7 +12,7 @@
                 <h4>Number into:</h4><input type="number" name="numberFieldInto" required class="inpDelWidth"><br>
             </div>
         </div>
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button class="addNewButton">Delete</button>
     </form>
     <form method="get" action="delOneOrSeveral" class="delRadioForm">
@@ -25,4 +21,4 @@
         <button class="delButton">Change</button>
     </form>
 </body>
-</html>
+</@c.page>

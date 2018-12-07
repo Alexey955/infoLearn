@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Main page</title>
-    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
-</head>
+<#import "parts/common.ftl" as c>
+
+<@c.page>
 <body class="bodyMain">
 
     <table class="mainTable" align="center">
@@ -11,7 +8,7 @@
             <td>
                 <form action="/logout" method="post">
                     <input type="submit" value="Sign Out" class="buttons"/>
-                    <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
                 </form>
             </td>
             <td id="tdFrame" class="bordBottBreak" rowspan="7" align="middle">
@@ -62,4 +59,4 @@
         </tr>
     </table>
 </body>
-</html>
+</@c.page>

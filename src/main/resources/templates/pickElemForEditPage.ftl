@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete An Element</title>
-    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
-</head>
+<#import "parts/common.ftl" as c>
+
+<@c.page>
 <body>
 <h3 align="center">Delete an element:</h3>
 <form method="get" action="editElem">
@@ -14,4 +10,4 @@
     <button class="addNewButton">Pick</button>
 </form>
 </body>
-</html>
+</@c.page>

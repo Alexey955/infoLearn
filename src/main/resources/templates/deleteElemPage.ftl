@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete An Element</title>
-    <link href = "../css/style.css" rel = "stylesheet" type = "text/css"/>
-</head>
+<#import "parts/common.ftl" as c>
+
+<@c.page>
 <body>
     <h3 align="center">Delete an element:</h3>
     <form method="post" action="wallAftDelOne">
         <div class="addNewInputs">
             <h4>Number:</h4><input type="number" name="numberField" class="editAndDelInp" required>
         </div>
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button class="addNewButton">Delete</button>
     </form>
     <form method="get" action="delOneOrSeveral" class="delRadioForm">
@@ -20,4 +16,4 @@
         <button class="delButton">Change</button>
     </form>
 </body>
-</html>
+</@c.page>
