@@ -2,7 +2,6 @@
 
 <@c.page>
 <body class="bodyMain">
-
     <table class="mainTable" align="center">
         <tr class="bordBottBreak trMainTable">
             <td>
@@ -11,8 +10,8 @@
                     <input type="hidden" name="_csrf" value="${_csrf.token}">
                 </form>
             </td>
-            <td id="tdFrame" class="bordBottBreak" rowspan="7" align="middle">
-                <iframe name="mainFrame" id="mainFrameId">Alternative text</iframe>
+            <td class="bordBottBreak tdFrame" rowspan="7" align="middle">
+                <iframe name="mainFrame" class="mainFrameId">Alternative text</iframe>
             </td>
         </tr>
         <tr class="trMainTable">

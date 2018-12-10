@@ -17,7 +17,6 @@ public class User implements UserDetails{
     private Long id;
     private String username;
     private String password;
-    private Integer userActivity;
 
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -73,14 +72,6 @@ public class User implements UserDetails{
         this.password = password;
     }
 
-    public Integer getUserActivity() {
-        return userActivity;
-    }
-
-    public void setUserActivity(Integer userActivity) {
-        this.userActivity = userActivity;
-    }
-
     public Set<Roles> getRoles() {
         return roles;
     }
@@ -89,3 +80,4 @@ public class User implements UserDetails{
         this.roles = roles;
     }
 }
+

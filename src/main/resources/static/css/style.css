@@ -8,7 +8,7 @@
 }
 
 .mainTable {
-    width: 60%;
+    width: 770px;
     margin-top: 10%;
 
     border: 9px darkgreen solid;
@@ -29,14 +29,14 @@
     border-bottom: 0px;
 }
 
-#mainFrameId {
-    width: 95%;
-    height: 235%;
+.mainFrameId {
+    width: 534px;
+    height: 343px;
     background-image: url("../images/backGroundWeider.jpg");
     background-size: 100%;
 }
 
-#tdFrame {
+.tdFrame {
     width: 75%;
     border-left: 7px darkgreen solid;
     border-right: 7px darkgreen solid;
@@ -124,8 +124,8 @@
 
 #AVGAccuracyText {
     position: absolute;
-    top: 35%;
-    left: 30%;
+    top: 120px;
+    left: 122px;
 }
 
 .inpLogPage {
@@ -156,9 +156,13 @@
     left: 18px;
 }
 
-/*#Two {
-    width: 180px;
-    position: relative;
-    left: 18px;
-}*/
-
+#tableDelUser {
+    position: fixed;
+    top: 80px;
+    left: 142px;
+    width: 250px;
+    border: 9px darkgreen solid;
+    border-radius: 30px;
+    background-image: url("../images/backGroundWeider.jpg");
+    padding: 5px;
+}

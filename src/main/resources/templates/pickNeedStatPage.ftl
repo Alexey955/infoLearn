@@ -7,8 +7,8 @@
             <td>
                 <button type="button" class="buttons">InfoLearn</button><br>
             </td>
-            <td id="tdFrame" class="bordBottBreak" rowspan="7" align="middle">
-                <iframe name="mainFrame" id="mainFrameId">Alternative text</iframe>
+            <td class="bordBottBreak tdFrame" rowspan="7" align="middle">
+                <iframe name="mainFrame" class="mainFrameId">Alternative text</iframe>
             </td>
         </tr>
         <tr class="trMainTable">
@@ -48,7 +48,7 @@
         </tr>
         <tr class="trMainTable">
             <td class="bordBottBreak">
-                <form action="/" method="get">
+                <form action="/userMain" method="get">
                     <button class="buttons">Back</button>
                 </form>
             </td>

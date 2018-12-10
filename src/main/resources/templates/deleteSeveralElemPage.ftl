@@ -9,7 +9,7 @@
                 <h4>Number from:</h4><input type="number" name="numberFieldFrom" required class="inpDelWidth"><br>
             </div>
             <div id="inpInto">
-                <h4>Number into:</h4><input type="number" name="numberFieldInto" required class="inpDelWidth"><br>
+                <h4>Number into:</h4><input type="number" name="numberFieldTo" required class="inpDelWidth"><br>
             </div>
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">

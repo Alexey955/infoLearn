@@ -5,7 +5,7 @@
     <h3 align="center">Stage accuracy:</h3>
     <div>
     <#list GroupByStage as x>
-        <div>There are ${x.count} elements in the ${x.stage} stage, average accuracy is ${x.avg}%.</div>
+        <div>There are ${x.count} elements in the ${x.stage} stage, average amount of mistakes is ${x.avg}%.</div>
     </#list>
     </div>
 </body>
