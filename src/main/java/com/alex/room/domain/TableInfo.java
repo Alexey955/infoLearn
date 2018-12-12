@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,39 +15,51 @@ public class TableInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+
+    @Min(value = 1, message = "Less than 1.")
+    @Max(value = 1000, message = "More than 1000.")
     private Integer number;
+
+    @Min(value = 1, message = "Less than 1.")
+    @Max(value = 1000, message = "More than 1000.")
     private Integer amountElem;
+
+    @Min(value = 0, message = "Less than 0.")
+    private Integer amountMistakes;
+
+    @Min(value = 1, message = "Less than 1.")
+    @Max(value = 7, message = "More than 7.")
+    private Integer stage;
+
     private Integer percentFalse;
     private String datePriorRep;
     private String dateNextRep;
     private Date typeDatePriorRep;
     private Date typeDateNextRep;
-    private Integer stage;
     private String username;
+
+
 
     public TableInfo() {
     }
 
-    public TableInfo(Integer number, Integer amountElem, Integer percentFalse, String datePriorRep,
+    public TableInfo(Integer number, Integer amountElem, Integer amountMistakes, Integer percentFalse, String datePriorRep,
                      String dateNextRep, Integer stage, String username) throws ParseException {
 
         this.number = number;
         this.amountElem = amountElem;
+        this.amountMistakes = amountMistakes;
         this.percentFalse = percentFalse;
         this.datePriorRep = datePriorRep;
         this.dateNextRep = dateNextRep;
         this.stage = stage;
         this.username = username;
 
-        Date dateForConver;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-        dateForConver = simpleDateFormat.parse(datePriorRep);
-        this.typeDatePriorRep = dateForConver;
+        this.typeDatePriorRep = simpleDateFormat.parse(datePriorRep);
 
-        dateForConver = simpleDateFormat.parse(dateNextRep);
-        this.typeDateNextRep = dateForConver;
-
+        this.typeDateNextRep = simpleDateFormat.parse(dateNextRep);
     }
 
     public Integer getId() {
@@ -126,5 +140,13 @@ public class TableInfo {
 
     public void setUsername(String user) {
         this.username = user;
+    }
+
+    public Integer getAmountMistakes() {
+        return amountMistakes;
+    }
+
+    public void setAmountMistakes(Integer amountMistakes) {
+        this.amountMistakes = amountMistakes;
     }
 }

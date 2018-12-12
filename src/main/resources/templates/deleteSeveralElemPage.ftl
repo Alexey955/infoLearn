@@ -9,8 +9,13 @@
                 <h4>Number from:</h4><input type="number" name="numberFieldFrom" required class="inpDelWidth"><br>
             </div>
             <div id="inpInto">
-                <h4>Number into:</h4><input type="number" name="numberFieldTo" required class="inpDelWidth"><br>
+                <h4>Number to:</h4><input type="number" name="numberFieldTo" required class="inpDelWidth"><br>
             </div>
+            <#if errorFromOrTo??>
+                <div class="invalid-feedback">
+                ${errorFromOrTo}
+                </div>
+            </#if>
         </div>
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <button class="addNewButton">Delete</button>

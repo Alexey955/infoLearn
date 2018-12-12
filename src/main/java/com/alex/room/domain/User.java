@@ -1,6 +1,7 @@
 package com.alex.room.domain;
 
 import com.alex.room.enums.Roles;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -15,7 +16,11 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Length(min = 6, message = "Less than 6 symbols.")
+    @Length(max = 10, message = "More than 10 symbols.")
     private String username;
+    @Length(min = 6, message = "Less than 6 symbols.")
+    @Length(max = 10, message = "More than 10 symbols.")
     private String password;
 
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)

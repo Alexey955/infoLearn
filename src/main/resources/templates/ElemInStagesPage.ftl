@@ -4,7 +4,13 @@
 <@c.page>
 <body>
     <h3 align="center">Elements in stages:</h3>
-    <@ml.myList ElemInStage>
-    </@ml.myList>
+
+    <#if ElemInStage??>
+        <@ml.myList ElemInStage>
+        </@ml.myList>
+    <#else>
+        <h3 class="AVGAccuracyText">There are not elements.</h3>
+    </#if>
+
 </body>
 </@c.page>

@@ -2,6 +2,10 @@
 
 <@c.page>
 <body>
-    <h3 id="AVGAccuracyText">Average amount of mistakes is ${avgAccuracy}%.</h3>
+    <#if avgAccuracy??>
+        <h3 class="AVGAccuracyText">Average amount of mistakes is ${avgAccuracy}%.</h3>
+        <#else>
+            <h3 class="AVGAccuracyText">There are not elements.</h3>
+    </#if>
 </body>
 </@c.page>

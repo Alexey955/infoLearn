@@ -103,16 +103,17 @@
 #pickElemRepeatInp {
     position: fixed;
     bottom: 2%;
-    left: 65%;
+    /*left: 65%;*/
+    right: 120px;
 }
 
 .ElemRepeatInp {
-    width: 40%;
+    width: 80px;
 }
 
-.editPageTable {
+/*.editPageTable {
 
-}
+}*/
 
 .inpEditPage {
     width: 70%;
@@ -122,7 +123,7 @@
     width: 20%;
 }
 
-#AVGAccuracyText {
+.AVGAccuracyText {
     position: absolute;
     top: 120px;
     left: 122px;
@@ -165,4 +166,17 @@
     border-radius: 30px;
     background-image: url("../images/backGroundWeider.jpg");
     padding: 5px;
+}
+
+.trLoginPage {
+    width: 218px;
+    height: 60px;
+}
+
+.invalid-feedback {
+    color: darkred;
+}
+
+#h3EditElem {
+    margin-bottom: 8px;
 }

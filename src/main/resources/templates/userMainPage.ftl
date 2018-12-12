@@ -51,7 +51,7 @@
         </tr>
         <tr class="trMainTable">
             <td class="bordBottBreak">
-                <form target="mainFrame" action="" method="post">
+                <form method="get">
                     <button class="buttons">Settings</button>
                 </form>
             </td>

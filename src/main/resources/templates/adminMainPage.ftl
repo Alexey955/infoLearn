@@ -37,7 +37,7 @@
     </tr>
     <tr class="trMainTable">
         <td>
-            <form target="mainFrame" action="#" method="get">
+            <form method="get">
                 <button class="buttons">Settings</button>
             </form>
         </td>

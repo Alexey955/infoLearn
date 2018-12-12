@@ -2,33 +2,58 @@
 
 <@c.page>
 <body>
-    <h3 align="center">Edit an element:</h3>
+    <h3 id="h3EditElem" align="center">Edit an element:</h3>
     <form method="post" action="wallAftEdit">
-        <table id="editPageTable" align="center">
+        <table <#--id="editPageTable"--> align="center">
             <tr>
                 <td>
-                    <h4>Amount of theses:</h4><input type="number" name="thesesField" class="inpEditPage"
-                                                     placeholder=${DateForPrompt.amountElem} required><br>
+                    <h4>Amount of theses:</h4>
+                    <input type="number" name="amountElem" class="inpEditPage" placeholder=${strForEdit.amountElem} required>
+                    <#if amountElemError??>
+                        <div class="invalid-feedback">
+                        ${amountElemError}
+                        </div>
+                    </#if>
                 </td>
                 <td>
-                    <h4>Previous repeat date:</h4><input type="text" name="priorDateField"
-                                                         placeholder=${DateForPrompt.datePriorRep} required><br>
+                    <h4>Previous repeat date:</h4>
+                    <input type="text" name="datePriorRep" placeholder=${strForEdit.datePriorRep} required>
+                    <#if datePriorRepError??>
+                        <div class="invalid-feedback">
+                        ${datePriorRepError}
+                        </div>
+                    </#if>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h4>Quantity of mistakes:</h4><input type="number" name="mistakesField" class="inpEditPage"
-                                                         placeholder=${qualityFails} required><br>
+                    <h4>Quantity of mistakes:</h4>
+                    <input type="number" name="amountMistakes" class="inpEditPage" placeholder=${qualityFails} required>
+                    <#if amountMistakesError??>
+                        <div class="invalid-feedback">
+                        ${amountMistakesError}
+                        </div>
+                    </#if>
                 </td>
                 <td>
-                    <h4>Next repeat date:</h4><input type="text" name="nextRepDateField"
-                                                     placeholder=${DateForPrompt.dateNextRep} required><br>
+                    <h4>Next repeat date:</h4>
+                    <input type="text" name="dateNextRep" placeholder=${strForEdit.dateNextRep} required>
+                    <#if dateNextRepError??>
+                        <div class="invalid-feedback">
+                        ${dateNextRepError}
+                        </div>
+                    </#if>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <h4>Stage:</h4><input type="number" name="inpStage" class="inpEditPage"
-                                          placeholder=${DateForPrompt.stage} required>
+                    <h4>Stage:</h4>
+                    <input type="number" name="stage" class="inpEditPage" placeholder=${strForEdit.stage} required>
+                    <#if stageError??>
+                        <div class="invalid-feedback">
+                        ${stageError}
+                        </div>
+                    </#if>
                 </td>
             </tr>
         </table>
