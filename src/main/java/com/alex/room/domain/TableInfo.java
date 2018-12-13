@@ -1,13 +1,15 @@
 package com.alex.room.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.hibernate.annotations.ColumnTransformer;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -31,13 +33,12 @@ public class TableInfo {
     @Max(value = 7, message = "More than 7.")
     private Integer stage;
 
-    private Integer percentFalse;
     private String datePriorRep;
     private String dateNextRep;
-    private Date typeDatePriorRep;
-    private Date typeDateNextRep;
+    private LocalDate typeDatePriorRep;
+    private LocalDate typeDateNextRep;
     private String username;
-
+    private Integer percentFalse;
 
 
     public TableInfo() {
@@ -55,11 +56,12 @@ public class TableInfo {
         this.stage = stage;
         this.username = username;
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        this.typeDatePriorRep = LocalDate.parse(datePriorRep, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        this.typeDateNextRep = LocalDate.parse(dateNextRep, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
+        /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
         this.typeDatePriorRep = simpleDateFormat.parse(datePriorRep);
-
-        this.typeDateNextRep = simpleDateFormat.parse(dateNextRep);
+        this.typeDateNextRep = simpleDateFormat.parse(dateNextRep);*/
     }
 
     public Integer getId() {
@@ -118,19 +120,19 @@ public class TableInfo {
         this.datePriorRep = datePriorRep;
     }
 
-    public Date getTypeDatePriorRep() {
+    public LocalDate getTypeDatePriorRep() {
         return typeDatePriorRep;
     }
 
-    public void setTypeDatePriorRep(Date typeDatePriorRep) {
+    public void setTypeDatePriorRep(LocalDate typeDatePriorRep) {
         this.typeDatePriorRep = typeDatePriorRep;
     }
 
-    public Date getTypeDateNextRep() {
+    public LocalDate getTypeDateNextRep() {
         return typeDateNextRep;
     }
 
-    public void setTypeDateNextRep(Date typeDateNextRep) {
+    public void setTypeDateNextRep(LocalDate typeDateNextRep) {
         this.typeDateNextRep = typeDateNextRep;
     }
 

@@ -5,7 +5,7 @@ import com.alex.room.domain.TableInfo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface TableInfoRepo extends CrudRepository<TableInfo, Integer> {
@@ -31,9 +31,9 @@ public interface TableInfoRepo extends CrudRepository<TableInfo, Integer> {
 
     TableInfo findByNumberAndUsername(int number, String username);
 
-    List<TableInfo> findByUsernameAndTypeDateNextRepIsLessThanEqual(String username,Date typeDateNextRep);
+    List<TableInfo> findByUsernameAndTypeDateNextRepIsLessThanEqual(String username, LocalDate typeDateNextRep);
 
-    List<TableInfo> findByDateNextRepAndUsername(String dateNextRep, String username);
+    List<TableInfo> findByTypeDateNextRepAndUsername(LocalDate dateNextRep, String username);
 
     @Query(value = "select avg(t.percentFalse) from TableInfo t where t.username = ?1")
     Integer countAvgPercentFalse(String username);

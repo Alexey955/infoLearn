@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @SessionAttributes("pickedUser")
@@ -44,51 +48,34 @@ public class ControllerStatus {
 
     @GetMapping("/showDayList")
     public String showDayList(@RequestParam String dayField, Model model,
-                              @AuthenticationPrincipal User user) throws ParseException {
+                              @AuthenticationPrincipal User user) {
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        Date dateForTestCorrect;
+        LocalDate dateForTestCorrect;
 
         try{
-            dateForTestCorrect = simpleDateFormat.parse(dayField);
+            dateForTestCorrect = LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
-        } catch (Exception exc) {
+        } catch (DateTimeParseException exc) {
             model.addAttribute("dateSelectError", "Need dd.mm.yyyy format.");
             return "pickDayPage";
         }
 
-        Date nowadays = new Date();
-        dateForTestCorrect = simpleDateFormat.parse(dayField);
-        if (dateForTestCorrect.before(nowadays)) {
-            model.addAttribute("dateSelectError", "Less than tomorrow.");
+        LocalDate nowadays = LocalDate.now();
+        dateForTestCorrect = LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+
+        if (dateForTestCorrect.isBefore(nowadays)) {
+            model.addAttribute("dateSelectError", "Less than today.");
             return "pickDayPage";
         }
 
-        List<TableInfo> listWithoutTail = tableInfoRepo.findByDateNextRepAndUsername(dayField, user.getUsername());
+        LocalDate pickedDateLocalDateType = LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        List<TableInfo> listWithoutTail = tableInfoRepo.findByTypeDateNextRepAndUsername(pickedDateLocalDateType, user.getUsername());
         model.addAttribute("DayListWithoutTail", listWithoutTail);
 
-        Date dateForConver;
-        dateForConver = simpleDateFormat.parse(dayField);
 
-        List<TableInfo> listWithTail = tableInfoRepo.findByUsernameAndTypeDateNextRepIsLessThanEqual(user.getUsername(), dateForConver);
-        //start to create a tail list
-        int numToDelete;
-        int indexToDell = 0;
+        List<TableInfo> listWithTail = tableInfoRepo.findByUsernameAndTypeDateNextRepIsLessThanEqual(user.getUsername(), pickedDateLocalDateType);
+        listWithTail.removeAll(listWithoutTail);
 
-        for(TableInfo x: listWithoutTail) {
-            numToDelete = x.getNumber();
-
-            for(TableInfo y: listWithTail) {
-                if(numToDelete == y.getNumber()) {
-                    break;
-                }
-                indexToDell += 1;
-            }
-
-            listWithTail.remove(indexToDell);
-            indexToDell = 0;
-        }
-        //stop to create a tail list
         model.addAttribute("DayListWithTail", listWithTail);
         model.addAttribute("pickedDay", dayField);
 
