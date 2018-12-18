@@ -7,6 +7,7 @@ import com.alex.room.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,9 +36,9 @@ public class AdminController {
     }
 
     @GetMapping("/pickOperatUser/{user}")
-    public String pickOperatUser(@PathVariable User user, Map<String, Object> model) {
+    public String pickOperatUser(@PathVariable User user, Model model) {
 
-        model.put("pickedUser", user);
+        model.addAttribute("pickedUser", user);
         return "pickOperatUserPage";
     }
 
@@ -62,7 +63,7 @@ public class AdminController {
         return "deleteUserOrNotPage";
     }
 
-    @PostMapping("/deteteTheUser")
+    @PostMapping("/deleteTheUser")
     public String deteteTheUser(@ModelAttribute("pickedUser") User user) {
 
         userRepo.deleteById(user.getId());

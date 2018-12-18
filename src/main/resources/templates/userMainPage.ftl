@@ -7,7 +7,7 @@
             <td>
                 <form action="/logout" method="post">
                     <input type="submit" value="Sign Out" class="buttons"/>
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 </form>
             </td>
             <td class="bordBottBreak tdFrame" rowspan="7" align="middle">
@@ -51,8 +51,8 @@
         </tr>
         <tr class="trMainTable">
             <td class="bordBottBreak">
-                <form method="get">
-                    <button class="buttons">Settings</button>
+                <form target="mainFrame" method="get" action="/showIntro">
+                    <button class="buttons">Intro</button>
                 </form>
             </td>
         </tr>

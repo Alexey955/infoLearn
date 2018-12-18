@@ -5,7 +5,9 @@
     <table class="mainTable" align="center">
         <tr class="bordBottBreak trMainTable">
             <td>
-                <button type="button" class="buttons">InfoLearn</button><br>
+                <form method="get">
+                    <button type="button" class="buttons">InfoLearn</button><br>
+                </form>
             </td>
             <td class="bordBottBreak tdFrame" rowspan="7" align="middle">
                 <iframe name="mainFrame" class="mainFrameId">Alternative text</iframe>

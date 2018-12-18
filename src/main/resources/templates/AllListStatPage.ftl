@@ -4,7 +4,9 @@
 <@c.page>
 <body>
     <h3 align="center">All list of elements:</h3>
-    <@ml.myList EntireListElem>
-    </@ml.myList>
+    <div>
+        <@ml.myList EntireListElem>
+        </@ml.myList>
+    </div>
 </body>
 </@c.page>

@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -34,10 +34,11 @@ public class ControllerStatus {
     }
 
     @GetMapping("/showAllList")
-    public String showAllList(Map<String, Object> model, @ModelAttribute("pickedUser") User user) {
+    public String showAllList(Model model, @ModelAttribute("pickedUser") User user /*@AuthenticationPrincipal User user*/) {
 
         List<TableInfo> tableInfoIterable = tableInfoRepo.findByUsername(user.getUsername());
-        model.put("EntireListElem", tableInfoIterable);
+        tableInfoIterable.sort(Comparator.comparing(TableInfo::getNumber));
+        model.addAttribute("EntireListElem", tableInfoIterable);
         return "AllListStatPage";
     }
 
@@ -52,7 +53,7 @@ public class ControllerStatus {
 
         LocalDate dateForTestCorrect;
 
-        try{
+        try {
             dateForTestCorrect = LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         } catch (DateTimeParseException exc) {
@@ -111,13 +112,12 @@ public class ControllerStatus {
 
         List<TableInfo> tableInfoList = new ArrayList<>();
         Integer topStage = tableInfoRepo.findMaxStage(user.getUsername());
-        /*tableInfoRepo.findAll().sort(Comparator.comparing(TableInfo::getStage).thenComparing(TableInfo::getNumber));*/
 
         if (topStage == null) {
             return "ElemInStagesPage";
         }
 
-        for(int i = 1; i <= topStage; i++) {
+        for (int i = 1; i <= topStage; i++) {
             tableInfoList.addAll(tableInfoRepo.findByStageAndUsername(i, user.getUsername()));
         }
 

@@ -4,7 +4,7 @@
 <body class="bodyMain">
 <div>
     <form id="loginForm" action="/login" method="post">
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     </form>
     <form id="registrForm" action="/registration" method="get"></form>
 

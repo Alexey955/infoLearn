@@ -3,13 +3,17 @@
 
 <@c.page>
 <body>
-    <h3 align="center">List of elements for ${pickedDay}:</h3>
-    <@ml.myList DayListWithoutTail>
-    </@ml.myList>
+    <h3 align="center">List of elements for <#if pickedDay??>${pickedDay}<#else>null</#if>:</h3>
+        <@ml.myList DayListWithoutTail>
+        </@ml.myList>
+
 
     <h4 align="center">With a tail:</h4>
+    <span>
+        <@ml.myList DayListWithTail>
+        </@ml.myList>
+    </span>
 
-    <@ml.myList DayListWithTail>
-    </@ml.myList>
+
 </body>
 </@c.page>

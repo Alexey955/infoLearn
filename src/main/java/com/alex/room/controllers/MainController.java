@@ -27,12 +27,12 @@ public class MainController {
     private TableInfoRepo tableInfoRepo;
 
     @GetMapping("/")
-    public String decideUserOrAdmin(@AuthenticationPrincipal User user, Map<String, Object> model) {
+    public String decideUserOrAdmin(@AuthenticationPrincipal User user, Model model) {
 
         if(user.getRoles().iterator().next().toString().equals("ADMIN")) {
             return "adminMainPage";
         } else {
-            model.put("pickedUser", user);
+            model.addAttribute("pickedUser", user);
             return "userMainPage";
         }
     }
@@ -53,21 +53,21 @@ public class MainController {
         if(bindingResult.hasErrors() || tableInfoValid != null || (tableInfo.getAmountElem() < tableInfo.getAmountMistakes())) {
             ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
             ControllerUtils.addErrorToModelIfNumberExists(tableInfoValid, model);
-            ControllerUtils.addErrorIfMistakesTooLarge(tableInfo, model);
+            ControllerUtils.addErrorIfMistakesTooLarge(tableInfo.getAmountElem(), tableInfo, model);
 
             return "addNewElemPage";
         }
 
         LocalDate datePriorRep = LocalDate.now();
-        LocalDate dateNextRep = datePriorRep.plusDays(Periods.Two.getDayAmount());
+        LocalDate dateNextRep = datePriorRep.plusDays(Periods.TWO.getDayAmount());
 
         String strDatePriorRep = datePriorRep.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        String strDateNextrRep = dateNextRep.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String strDateNextRep = dateNextRep.format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         int percentMistakes = (tableInfo.getAmountMistakes() * 100) / tableInfo.getAmountElem();
 
         TableInfo tableInfoTwo = new TableInfo(tableInfo.getNumber(), tableInfo.getAmountElem(), tableInfo.getAmountMistakes(),
-                    percentMistakes, strDatePriorRep, strDateNextrRep, 1, user.getUsername());
+                    percentMistakes, strDatePriorRep, strDateNextRep, 1, user.getUsername());
         tableInfoRepo.save(tableInfoTwo);
 
         return "wallpaperPage";
@@ -80,8 +80,7 @@ public class MainController {
     public String wallAftOneDel(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo, BindingResult bindingResult, Model model) {
 
         TableInfo tableInfoValid = tableInfoRepo.findByNumberAndUsername(tableInfo.getNumber(), user.getUsername());
-        if(bindingResult.hasErrors() || tableInfoValid == null) {
-            ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
+        if(tableInfoValid == null) {
             ControllerUtils.addErrorToModelIfNumberDoesntExist(tableInfoValid, tableInfo.getNumber(), model);
 
             return "deleteElemPage";
@@ -157,15 +156,22 @@ public class MainController {
     }
 
     @PostMapping("/wallAftRepeat")
-    public String wallAftRepeatSeveral(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo,
+    public String wallAftRepeat(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo,
                                        BindingResult bindingResult, Model model) {
 
         TableInfo tableInfoOld = tableInfoRepo.findByNumberAndUsername(tableInfo.getNumber(), user.getUsername());
 
-        if(bindingResult.hasErrors() || tableInfoOld == null || (tableInfo.getAmountElem() < tableInfo.getAmountMistakes())) {
+        int amountElements;
+        if(tableInfoOld != null) {
+            amountElements = tableInfoOld.getAmountElem();
+        } else {
+            amountElements = 1000;
+        }
+
+        if(bindingResult.hasErrors() || tableInfoOld == null || (tableInfoOld.getAmountElem() < tableInfo.getAmountMistakes())) {
             ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
             ControllerUtils.addErrorToModelIfNumberDoesntExist(tableInfoOld, tableInfo.getNumber(), model);
-            ControllerUtils.addErrorIfMistakesTooLarge(tableInfo, model);
+            ControllerUtils.addErrorIfMistakesTooLarge(amountElements, tableInfo, model);
 
             return "pickElemRepeatPage";
         }
@@ -200,8 +206,7 @@ public class MainController {
 
         TableInfo strForEdit = tableInfoRepo.findByNumberAndUsername(tableInfo.getNumber(), user.getUsername());
 
-        if(bindingResult.hasErrors() || strForEdit == null) {
-            ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
+        if(strForEdit == null) {
             ControllerUtils.addErrorToModelIfNumberDoesntExist(strForEdit, tableInfo.getNumber(), model);
 
             return "pickElemForEditPage";
@@ -219,7 +224,7 @@ public class MainController {
 
         if(bindingResult.hasErrors() || (tableInfo.getAmountElem() < tableInfo.getAmountMistakes())) {
             ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
-            ControllerUtils.addErrorIfMistakesTooLarge(tableInfo, model);
+            ControllerUtils.addErrorIfMistakesTooLarge(tableInfo.getAmountElem(), tableInfo, model);
 
             return "editElemPage";
         }
@@ -265,4 +270,7 @@ public class MainController {
         tableInfoRepo.save(tableInfoOld);
         return "wallpaperPage";
     }
+
+    @GetMapping("/showIntro")
+    public String showIntro() { return "showIntroPage"; }
 }

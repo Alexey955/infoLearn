@@ -1,9 +1,10 @@
 .bodyMain {
-     background-image: url("../images/mainGroundFour.jpg");
+     /*background-image: url("../images/mainGroundFour.jpg");*/
+    background-color: #688F58;
  }
 
 #bodyAndy {
-    background-image: url("../images/weiderKnuckle.png");
+    background-image: url("../images/done.png");
     background-size: 100%;
 }
 
@@ -11,7 +12,7 @@
     width: 770px;
     margin-top: 10%;
 
-    border: 9px darkgreen solid;
+    border: 9px #885017 solid;
     border-radius: 30px;
     border-spacing: 0;
 
@@ -21,8 +22,8 @@
 }
 
 .trMainTable {
-    border-bottom: 7px darkgreen solid;
-    background-color: darkgreen;
+    border-bottom: 7px #885017 solid;
+    background-color: #885017;
 }
 
 .bordBottBreak {
@@ -32,24 +33,25 @@
 .mainFrameId {
     width: 534px;
     height: 343px;
-    background-image: url("../images/backGroundWeider.jpg");
+    /*background-image: url("../images/backGroundWeider.jpg");*/
+    background-color: #BBCD9B;
     background-size: 100%;
 }
 
 .tdFrame {
     width: 75%;
-    border-left: 7px darkgreen solid;
-    border-right: 7px darkgreen solid;
+    border-left: 7px #885017 solid;
+    border-right: 7px #885017 solid;
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
-    background-color: darkgreen;
+    background-color: #885017;
 }
 
 .buttons {
     height: 45px;
     width: 100%;
     border-radius: 10px;
-    background: yellowgreen;
+    background: #F9E836;
 }
 /*new pages style*/
 
@@ -61,7 +63,7 @@
     height: 45px;
     width: 17%;
     border-radius: 10px;
-    background: yellowgreen;
+    background: #F9E836;
     position: fixed;
     right: 2%;
     bottom: 2%;
@@ -71,7 +73,7 @@
     height: 45px;
     width: 30%;
     border-radius: 10px;
-    background: yellowgreen;
+    background: #F9E836;
     position: fixed;
     left: 2%;
     bottom: 2%
@@ -138,9 +140,10 @@
     top: 27%;
     left: 40%;
     width: 250px;
-    border: 9px darkgreen solid;
+    border: 9px #885017 solid;
     border-radius: 30px;
-    background-image: url("../images/backGroundWeider.jpg");
+    /*background-image: url("../images/backGroundWeider.jpg");*/
+    background-color: #CDD699;
     padding: 5px;
 }
 
@@ -148,7 +151,7 @@
     width: 100%;
     height: 35px;
     border-radius: 10px;
-    background: yellowgreen;
+    background: #F9E836;
 }
 
 .inpTextLog {
@@ -162,9 +165,10 @@
     top: 80px;
     left: 142px;
     width: 250px;
-    border: 9px darkgreen solid;
+    border: 9px #885017 solid;
     border-radius: 30px;
-    background-image: url("../images/backGroundWeider.jpg");
+    /*background-image: url("../images/backGroundWeider.jpg");*/
+    background-color: #885017;
     padding: 5px;
 }
 
@@ -179,4 +183,8 @@
 
 #h3EditElem {
     margin-bottom: 8px;
+}
+
+.introTextIndent {
+    text-indent: 10px;
 }

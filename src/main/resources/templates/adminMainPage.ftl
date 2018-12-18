@@ -38,7 +38,7 @@
     <tr class="trMainTable">
         <td>
             <form method="get">
-                <button class="buttons">Settings</button>
+                <button class="buttons">Clean</button>
             </form>
         </td>
     </tr>

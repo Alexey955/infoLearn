@@ -4,60 +4,40 @@
 <body>
     <h3 id="h3EditElem" align="center">Edit an element:</h3>
     <form method="post" action="wallAftEdit">
-        <table <#--id="editPageTable"--> align="center">
+        <table align="center">
             <tr>
                 <td>
                     <h4>Amount of theses:</h4>
-                    <input type="number" name="amountElem" class="inpEditPage" placeholder=${strForEdit.amountElem} required>
-                    <#if amountElemError??>
-                        <div class="invalid-feedback">
-                        ${amountElemError}
-                        </div>
-                    </#if>
+                    <input type="number" name="amountElem" class="inpEditPage" placeholder=<#if strForEdit??>${strForEdit.amountElem}<#else>"null"</#if> required = ""/>
+                    <#if amountElemError??><div align="center" class="invalid-feedback">${amountElemError}</div></#if>
                 </td>
                 <td>
                     <h4>Previous repeat date:</h4>
-                    <input type="text" name="datePriorRep" placeholder=${strForEdit.datePriorRep} required>
-                    <#if datePriorRepError??>
-                        <div class="invalid-feedback">
-                        ${datePriorRepError}
-                        </div>
-                    </#if>
+                    <input type="text" name="datePriorRep" placeholder=<#if strForEdit??>${strForEdit.datePriorRep}<#else>"null"</#if> required = ""/>
+                    <#if datePriorRepError??><div align="center" class="invalid-feedback">${datePriorRepError}</div></#if>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h4>Quantity of mistakes:</h4>
-                    <input type="number" name="amountMistakes" class="inpEditPage" placeholder=${qualityFails} required>
-                    <#if amountMistakesError??>
-                        <div class="invalid-feedback">
-                        ${amountMistakesError}
-                        </div>
-                    </#if>
+                    <input type="number" name="amountMistakes" class="inpEditPage" placeholder=<#if qualityFails??>${qualityFails}<#else>"null"</#if> required = ""/>
+                    <#if amountMistakesError??><div align="center" class="invalid-feedback">${amountMistakesError}</div></#if>
                 </td>
                 <td>
                     <h4>Next repeat date:</h4>
-                    <input type="text" name="dateNextRep" placeholder=${strForEdit.dateNextRep} required>
-                    <#if dateNextRepError??>
-                        <div class="invalid-feedback">
-                        ${dateNextRepError}
-                        </div>
-                    </#if>
+                    <input type="text" name="dateNextRep" placeholder=<#if strForEdit??>${strForEdit.dateNextRep}<#else>"null"</#if> required = ""/>
+                    <#if dateNextRepError??><div align="center" class="invalid-feedback">${dateNextRepError}</div></#if>
                 </td>
             </tr>
             <tr>
                 <td>
                     <h4>Stage:</h4>
-                    <input type="number" name="stage" class="inpEditPage" placeholder=${strForEdit.stage} required>
-                    <#if stageError??>
-                        <div class="invalid-feedback">
-                        ${stageError}
-                        </div>
-                    </#if>
+                    <input type="number" name="stage" class="inpEditPage" placeholder=<#if strForEdit??>${strForEdit.stage}<#else>"null"</#if> required = ""/>
+                    <#if stageError??><div align="center" class="invalid-feedback">${stageError}</div></#if>
                 </td>
             </tr>
         </table>
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button class="addNewButton">Edit</button>
     </form>
 </body>

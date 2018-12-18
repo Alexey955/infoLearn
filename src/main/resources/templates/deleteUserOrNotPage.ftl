@@ -2,7 +2,7 @@
 
 <@c.page>
 <body>
-        <form id="deteteTheUser" action="/deteteTheUser" method="post">
+        <form id="deteteTheUser" action="/deleteTheUser" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
         </form>
         <form target="_top" id="pickOperatUser" action="/pickOperatUser/${pickedUser.id}" method="get"></form>

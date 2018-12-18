@@ -29,18 +29,18 @@ public class ControllerUtils {
 
     static void addErrorToModelIfNumberExists(TableInfo tableInfoValid, Model model) {
         if(tableInfoValid != null) {
-            model.addAttribute("numberError", "number " + tableInfoValid.getNumber() + " exists.");
+            model.addAttribute("numberError", "Number " + tableInfoValid.getNumber() + " exists.");
         }
     }
 
     static void addErrorToModelIfNumberDoesntExist(TableInfo tableInfoValid, int numDoesntExist, Model model) {
         if(tableInfoValid == null) {
-            model.addAttribute("numberError", "number " + numDoesntExist + " doesn't exist.");
+            model.addAttribute("numberError", "Number " + numDoesntExist + " doesn't exist.");
         }
     }
 
-    static void addErrorIfMistakesTooLarge(TableInfo tableInfo, Model model) {
-        if (tableInfo.getAmountElem() < tableInfo.getAmountMistakes()) {
+    static void addErrorIfMistakesTooLarge(int amountElements, TableInfo tableInfo, Model model) {
+        if (amountElements < tableInfo.getAmountMistakes()) {
             model.addAttribute("amountMistakesError", "Amount of mistakes are too large.");
         }
     }
@@ -59,7 +59,7 @@ public class ControllerUtils {
 
     static void addErrorToModelIfUserExists(User userValid, Model model) {
         if(userValid != null) {
-            model.addAttribute("usernameError", "user " + userValid.getUsername() + " exists.");
+            model.addAttribute("usernameError", "User " + userValid.getUsername() + " exists.");
         }
     }
 }
