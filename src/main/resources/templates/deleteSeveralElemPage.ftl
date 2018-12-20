@@ -8,7 +8,7 @@
             <div id="inpFrom">
                 <h4>Number from:</h4><input type="number" name="numberFieldFrom" required = "" class="inpDelWidth"/><br/>
             </div>
-            <div id="inpInto">
+            <div id="inpTo">
                 <h4>Number to:</h4><input type="number" name="numberFieldTo" required = "" class="inpDelWidth"/>
                 <#if errorFromOrTo??><div class="invalid-feedback">${errorFromOrTo}</div></#if>
             </div>

@@ -1,5 +1,4 @@
 .bodyMain {
-     /*background-image: url("../images/mainGroundFour.jpg");*/
     background-color: #688F58;
  }
 
@@ -10,7 +9,7 @@
 
 .mainTable {
     width: 770px;
-    margin-top: 10%;
+    margin-top: 131px;
 
     border: 9px #885017 solid;
     border-radius: 30px;
@@ -33,13 +32,12 @@
 .mainFrameId {
     width: 534px;
     height: 343px;
-    /*background-image: url("../images/backGroundWeider.jpg");*/
     background-color: #BBCD9B;
     background-size: 100%;
 }
 
 .tdFrame {
-    width: 75%;
+    width: 564px;
     border-left: 7px #885017 solid;
     border-right: 7px #885017 solid;
     border-bottom-right-radius: 10px;
@@ -53,76 +51,70 @@
     border-radius: 10px;
     background: #F9E836;
 }
-/*new pages style*/
 
 .addNewInputs {
-    margin-left: 10%;
+    margin-left: 52px;
 }
 
 .addNewButton {
     height: 45px;
-    width: 17%;
+    width: 75px;
     border-radius: 10px;
     background: #F9E836;
     position: fixed;
-    right: 2%;
-    bottom: 2%;
+    right: 11px;
+    bottom: 8px;
 }
 
 .delButton {
     height: 45px;
-    width: 30%;
+    width: 145px;
     border-radius: 10px;
     background: #F9E836;
     position: fixed;
-    left: 2%;
-    bottom: 2%
+    left: 11px;
+    bottom: 8px;
 }
 
 .delRadioForm {
     position: fixed;
-    left: 2%;
-    bottom: 12%;
+    left: 11px;
+    bottom: 45px;
 }
 
-#inpInto {
+#inpTo {
     position: fixed;
-    left: 30%;
-    top: 12%;
+    left: 180px;
+    top: 39px;
     margin-right: 2px;
-    width: 25%;
+    width: 130px;
 }
 
 #inpFrom {
-    width: 25%;
+    width: 130px;
     margin-right: 2px;
 }
 
 .inpDelWidth {
-    width: 87%;
+    width: 117px;
 }
 
 #pickElemRepeatInp {
     position: fixed;
-    bottom: 2%;
-    /*left: 65%;*/
-    right: 120px;
+    bottom: 8px;
+    right: 100px;
 }
 
 .ElemRepeatInp {
     width: 80px;
 }
 
-/*.editPageTable {
-
-}*/
-
 .inpEditPage {
-    width: 70%;
+    width: 125px;
 }
 
 .editAndDelInp {
-    width: 20%;
+    width: 97px;
 }
 
 .AVGAccuracyText {
@@ -137,12 +129,11 @@
 
 .tableLoginPage {
     position: fixed;
-    top: 27%;
-    left: 40%;
+    top: 172px;
+    left: 520px;
     width: 250px;
     border: 9px #885017 solid;
     border-radius: 30px;
-    /*background-image: url("../images/backGroundWeider.jpg");*/
     background-color: #CDD699;
     padding: 5px;
 }
@@ -167,7 +158,6 @@
     width: 250px;
     border: 9px #885017 solid;
     border-radius: 30px;
-    /*background-image: url("../images/backGroundWeider.jpg");*/
     background-color: #885017;
     padding: 5px;
 }
@@ -187,4 +177,12 @@
 
 .introTextIndent {
     text-indent: 10px;
+}
+
+.margineRight {
+    margin-right: 15px;
+}
+
+.margineLeft {
+    margin-left: 15px;
 }

@@ -33,7 +33,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setRoles(Collections.singleton(Roles.USER));
+        user.setRoles(Collections.singleton(Roles.ADMIN));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepo.save(user);
