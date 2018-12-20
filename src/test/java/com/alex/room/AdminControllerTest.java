@@ -106,7 +106,7 @@ public class AdminControllerTest {
 
         User Alexandr = new User();
         Alexandr.setUsername("Alexandr");
-        Alexandr.setId(Long.valueOf(3));
+        Alexandr.setId(3L);
 
         this.mockMvc.perform(MockMvcRequestBuilders.post("/deleteTheUser")
                 .sessionAttr("pickedUser", Alexandr)

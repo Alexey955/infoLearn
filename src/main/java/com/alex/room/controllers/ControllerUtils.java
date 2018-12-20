@@ -1,7 +1,6 @@
 package com.alex.room.controllers;
 
 import com.alex.room.domain.TableInfo;
-import com.alex.room.domain.User;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -54,12 +53,6 @@ public class ControllerUtils {
     static void addErrorIfDateLessThanToday(LocalDate dateForTestCorrect, LocalDate nowadays, Model model) {
         if (dateForTestCorrect.isBefore(nowadays)) {
             model.addAttribute("dateNextRepError", "Less than today.");
-        }
-    }
-
-    static void addErrorToModelIfUserExists(User userValid, Model model) {
-        if(userValid != null) {
-            model.addAttribute("usernameError", "User " + userValid.getUsername() + " exists.");
         }
     }
 }

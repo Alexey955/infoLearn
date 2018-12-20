@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,14 @@ public class AdminController {
 
     @GetMapping("/showUserList")
     public String showUserList(Map<String, Object> model) {
+
         List<User> userList = userRepo.findAll();
+
+        for(int i = 0; i < userList.size(); i++) {
+            if(userList.get(i).getRoles().iterator().next().toString().equals("ADMIN")) {
+                userList.remove(i);
+            }
+        }
         model.put("userList", userList);
         return "userListPage";
     }
@@ -45,8 +53,7 @@ public class AdminController {
     @GetMapping("/showFullAvgAccuracy")
     public String showFullAvgAccuracy(Map<String, Object> model) {
 
-        int fullAvgAccuracy = tableInfoRepo.countFullAvgPercentFalse();
-        model.put("avgAccuracy", fullAvgAccuracy);
+        model.put("avgAccuracy", tableInfoRepo.countFullAvgPercentFalse());
         return "AvgAccuracyPage";
     }
 
@@ -63,8 +70,9 @@ public class AdminController {
         return "deleteUserOrNotPage";
     }
 
+    @Transactional(value = Transactional.TxType.REQUIRED)
     @PostMapping("/deleteTheUser")
-    public String deteteTheUser(@ModelAttribute("pickedUser") User user) {
+    public String deleteTheUser(@ModelAttribute("pickedUser") User user) {
 
         userRepo.deleteById(user.getId());
 

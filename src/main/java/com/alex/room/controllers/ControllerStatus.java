@@ -29,12 +29,15 @@ public class ControllerStatus {
     TableInfoRepo tableInfoRepo;
 
     @GetMapping("/pickNeedStat")
-    public String pickNeedStat() {
+    public String pickNeedStat(@AuthenticationPrincipal User user, Model model) {
+        if (model.asMap().isEmpty()) {
+            model.addAttribute("pickedUser", user);
+        }
         return "pickNeedStatPage";
     }
 
     @GetMapping("/showAllList")
-    public String showAllList(Model model, @ModelAttribute("pickedUser") User user /*@AuthenticationPrincipal User user*/) {
+    public String showAllList(Model model, @ModelAttribute("pickedUser") User user) {
 
         List<TableInfo> tableInfoIterable = tableInfoRepo.findByUsername(user.getUsername());
         tableInfoIterable.sort(Comparator.comparing(TableInfo::getNumber));
@@ -51,10 +54,8 @@ public class ControllerStatus {
     public String showDayList(@RequestParam String dayField, Model model,
                               @AuthenticationPrincipal User user) {
 
-        LocalDate dateForTestCorrect;
-
         try {
-            dateForTestCorrect = LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         } catch (DateTimeParseException exc) {
             model.addAttribute("dateSelectError", "Need dd.mm.yyyy format.");
@@ -62,6 +63,7 @@ public class ControllerStatus {
         }
 
         LocalDate nowadays = LocalDate.now();
+        LocalDate dateForTestCorrect;
         dateForTestCorrect = LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
         if (dateForTestCorrect.isBefore(nowadays)) {

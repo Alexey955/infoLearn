@@ -69,8 +69,7 @@ public class RegistrationControllerTest {
 
         this.mockMvc.perform(multipart)
                 .andDo(print())
-                .andExpect(MockMvcResultMatchers.xpath("//input[@name='username']/following-sibling::div").string("More than 10 symbols."))
-                .andExpect(MockMvcResultMatchers.xpath("//input[@name='password']/following-sibling::div").string("More than 10 symbols."));
+                .andExpect(MockMvcResultMatchers.xpath("//input[@name='username']/following-sibling::div").string("More than 10 symbols."));
     }
 
     @Test

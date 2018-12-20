@@ -6,7 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -43,7 +42,7 @@ public class TableInfo {
     }
 
     public TableInfo(Integer number, Integer amountElem, Integer amountMistakes, Integer percentFalse, String datePriorRep,
-                     String dateNextRep, Integer stage, String username) throws ParseException {
+                     String dateNextRep, Integer stage, String username) {
 
         this.number = number;
         this.amountElem = amountElem;
@@ -56,10 +55,6 @@ public class TableInfo {
 
         this.typeDatePriorRep = LocalDate.parse(datePriorRep, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         this.typeDateNextRep = LocalDate.parse(dateNextRep, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-
-        /*SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        this.typeDatePriorRep = simpleDateFormat.parse(datePriorRep);
-        this.typeDateNextRep = simpleDateFormat.parse(dateNextRep);*/
     }
 
     public Integer getId() {

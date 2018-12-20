@@ -5,6 +5,7 @@ import com.alex.room.domain.User;
 import com.alex.room.enums.Periods;
 import com.alex.room.repos.TableInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +13,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -45,9 +45,10 @@ public class MainController {
         return "addNewElemPage";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/wallAftAdd")
     public String wallAftAdd(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo, BindingResult bindingResult,
-                             Model model) throws ParseException {
+                             Model model) {
 
         TableInfo tableInfoValid = tableInfoRepo.findByNumberAndUsername(tableInfo.getNumber(), user.getUsername());
         if(bindingResult.hasErrors() || tableInfoValid != null || (tableInfo.getAmountElem() < tableInfo.getAmountMistakes())) {
@@ -76,12 +77,13 @@ public class MainController {
     @GetMapping("/delElem")
     public String delAnElem() { return "deleteElemPage"; }
 
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/wallAftDelOne")
     public String wallAftOneDel(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo, BindingResult bindingResult, Model model) {
 
         TableInfo tableInfoValid = tableInfoRepo.findByNumberAndUsername(tableInfo.getNumber(), user.getUsername());
         if(tableInfoValid == null) {
-            ControllerUtils.addErrorToModelIfNumberDoesntExist(tableInfoValid, tableInfo.getNumber(), model);
+            ControllerUtils.addErrorToModelIfNumberDoesntExist(null, tableInfo.getNumber(), model);
 
             return "deleteElemPage";
         }
@@ -101,9 +103,7 @@ public class MainController {
         }
     }
 
-    @PostMapping("/delSeveralElem")
-    public String delSeveralElements() { return "deleteSeveralElemPage"; }
-
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/wallAftDelSeveral")
     public String wallAftDelSeveral(@RequestParam int numberFieldFrom, @RequestParam int numberFieldTo,
                                     @AuthenticationPrincipal User user, Model model) {
@@ -155,6 +155,7 @@ public class MainController {
         return "pickElemRepeatPage";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/wallAftRepeat")
     public String wallAftRepeat(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo,
                                        BindingResult bindingResult, Model model) {
@@ -178,7 +179,7 @@ public class MainController {
 
         int percentFalse = (tableInfo.getAmountMistakes() * 100) / tableInfoOld.getAmountElem();
 
-        Periods periods[] = Periods.values();
+        Periods[] periods = Periods.values();
         Integer amountDaysToAdd = periods[tableInfoOld.getStage() + 1].getDayAmount();
 
         LocalDate datePriorRep = LocalDate.now();
@@ -201,13 +202,12 @@ public class MainController {
     public String pickElemForEdit() { return "pickElemForEditPage"; }
 
     @GetMapping("/editElem")
-    public String getEditElemPage(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo,
-                                  BindingResult bindingResult, Model model) {
+    public String getEditElemPage(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo, BindingResult bindingResult, Model model) {
 
         TableInfo strForEdit = tableInfoRepo.findByNumberAndUsername(tableInfo.getNumber(), user.getUsername());
 
         if(strForEdit == null) {
-            ControllerUtils.addErrorToModelIfNumberDoesntExist(strForEdit, tableInfo.getNumber(), model);
+            ControllerUtils.addErrorToModelIfNumberDoesntExist(null, tableInfo.getNumber(), model);
 
             return "pickElemForEditPage";
         }
@@ -218,6 +218,7 @@ public class MainController {
         return "editElemPage";
     }
 
+    @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/wallAftEdit")
     public String wallAftEdit(@AuthenticationPrincipal User user, @Valid TableInfo tableInfo, BindingResult bindingResult,
                               Model model, @ModelAttribute("numberFromTable") int numberFromTable) {
@@ -229,9 +230,8 @@ public class MainController {
             return "editElemPage";
         }
 
-        LocalDate dateForTestCorrect;
         try{
-            dateForTestCorrect = LocalDate.parse(tableInfo.getDatePriorRep(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            LocalDate.parse(tableInfo.getDatePriorRep(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
            } catch (DateTimeParseException exc) {
                model.addAttribute("datePriorRepError", "Need dd.mm.yyyy format.");
@@ -239,7 +239,7 @@ public class MainController {
            }
 
         try{
-            dateForTestCorrect = LocalDate.parse(tableInfo.getDateNextRep(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+            LocalDate.parse(tableInfo.getDateNextRep(), DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 
            } catch (DateTimeParseException exc) {
 

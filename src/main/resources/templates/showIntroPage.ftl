@@ -13,10 +13,10 @@
         <li>After studying or the first repetition, you must repeat this information after 30 - 60 minutes,
             then use the "add" button and enter the number block of information, the number of theses and
             the number of theses repeated with errors.</li>
-        <li>To check the list of blocks that need to be repeated today, use the "lost for repeating" key. After repeating,
+        <li>To check the list of blocks that need to be repeated today, use the "list for repeating" key. After repeating,
             press the "repeat" and select the block number and the number of theses repeated with errors.</li>
         <li>To delete a block of information, use the "delete" key and specify the block number.</li>
-        <li>To edit the block, use the "edit element" key and fill in the form fields.</li>
+        <li>To edit the block, use the "edit an element" key and fill in the form fields.</li>
         <li>To get a summary of the learning process, use the "status" button.</li>
     </ol>
     <p class = "introTextIndent">I hope with the help of this application you can improve the quality of memorization of the studied material,

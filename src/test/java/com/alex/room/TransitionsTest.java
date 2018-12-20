@@ -5,6 +5,7 @@ import com.alex.room.controllers.ControllerStatus;
 import com.alex.room.controllers.MainController;
 import com.alex.room.domain.TableInfo;
 import com.alex.room.domain.User;
+import com.alex.room.service.UserService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,9 +36,11 @@ public class TransitionsTest {
     @Autowired
     private AdminController adminController;
 
+    @Autowired
+    private UserService userService;
+
     @MockBean
     private Model model;
-
 
     @MockBean
     private BindingResult bindingResult;
@@ -50,7 +53,7 @@ public class TransitionsTest {
         tableInfo.setNumber(1);
         user.setUsername("Alexandr");
 
-        Assert.assertEquals("editElemPage", mainController.getEditElemPage(user,tableInfo,bindingResult,model));
+        Assert.assertEquals("editElemPage", mainController.getEditElemPage(user,tableInfo, bindingResult, model));
     }
 
     @Test
@@ -76,8 +79,25 @@ public class TransitionsTest {
     @WithUserDetails("Alexey")
     public void trueDeleteUserOrNotTest() {
         User Alexandr = new User();
-        Alexandr.setId(Long.valueOf(3));
+        Alexandr.setId(3L);
 
         Assert.assertEquals("deleteUserOrNotPage", adminController.deleteUserOrNot(Alexandr));
+    }
+
+    @Test
+    public void trueUserServiceAddUserTest() {
+        User Eugene = new User();
+        Eugene.setUsername("Eugene");
+        Eugene.setPassword("555555");
+
+        Assert.assertTrue(userService.addUser(Eugene));
+    }
+
+    @Test
+    public void badUserServiceAddUserTest() {
+        User Alexandr = new User();
+        Alexandr.setUsername("Alexandr");
+
+        Assert.assertFalse(userService.addUser(Alexandr));
     }
 }

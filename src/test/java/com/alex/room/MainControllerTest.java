@@ -191,7 +191,7 @@ public class MainControllerTest {
         Alexandr.setUsername("Alexandr");
         Valery.setUsername("Valery");
 
-        Integer numberFromTable = 1;;
+        Integer numberFromTable = 1;
 
         MockHttpServletRequestBuilder multipart = multipart("/wallAftEdit").sessionAttr("numberFromTable", numberFromTable)
                 .param("amountElem", "20")

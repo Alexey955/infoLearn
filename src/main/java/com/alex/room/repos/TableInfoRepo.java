@@ -40,7 +40,4 @@ public interface TableInfoRepo extends CrudRepository<TableInfo, Integer> {
 
     @Query(value = "select avg(t.percentFalse) from TableInfo t")
     Integer countFullAvgPercentFalse();
-
-    @Query(value = "select t.amountElem from TableInfo t where t.username = ?1 and t.number = ?2")
-    Integer findAmountElemByUsernameAndNumber(String username, Integer number);
 }

@@ -20,7 +20,6 @@ public class User implements UserDetails{
     @Length(max = 10, message = "More than 10 symbols.")
     private String username;
     @Length(min = 6, message = "Less than 6 symbols.")
-    @Length(max = 10, message = "More than 10 symbols.")
     private String password;
 
     @ElementCollection(targetClass = Roles.class, fetch = FetchType.EAGER)
