@@ -1,6 +1,5 @@
 package com.alex.room.controllers;
 
-import com.alex.room.domain.TableInfo;
 import com.alex.room.domain.User;
 import com.alex.room.repos.TableInfoRepo;
 import com.alex.room.repos.UserRepo;
@@ -75,11 +74,6 @@ public class AdminController {
     public String deleteTheUser(@ModelAttribute("pickedUser") User user) {
 
         userRepo.deleteById(user.getId());
-
-        List<TableInfo> tableInfo = tableInfoRepo.findByUsername(user.getUsername());
-        for (TableInfo x: tableInfo) {
-            tableInfoRepo.deleteById(x.getId());
-        }
 
         return "wallpaperPage";
     }

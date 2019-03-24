@@ -27,77 +27,77 @@ import org.springframework.validation.BindingResult;
 @Sql(value = {"/tableInfo-list-after.sql", "/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class TransitionsTest {
 
-    @Autowired
-    private MainController mainController;
-
-    @Autowired
-    private ControllerStatus controllerStatus;
-
-    @Autowired
-    private AdminController adminController;
-
-    @Autowired
-    private UserService userService;
-
-    @MockBean
-    private Model model;
-
-    @MockBean
-    private BindingResult bindingResult;
-
-    @Test
-    public void truePickNumForEditTest() {
-        TableInfo tableInfo = new TableInfo();
-        User user = new User();
-
-        tableInfo.setNumber(1);
-        user.setUsername("Alexandr");
-
-        Assert.assertEquals("editElemPage", mainController.getEditElemPage(user,tableInfo, bindingResult, model));
-    }
-
-    @Test
-    public void truePickNumForDayListTest() {
-        User Alexandr = new User();
-        Alexandr.setUsername("Alexandr");
-
-        String dayField = "01.12.2020";
-
-        Assert.assertEquals("showDayListPage", controllerStatus.showDayList(dayField, model, Alexandr));
-    }
-
-    @Test
-    @WithUserDetails("Alexey")
-    public void truePickUserByAdminTest() {
-        User Alexandr = new User();
-        Alexandr.setUsername("Alexandr");
-
-        Assert.assertEquals("pickOperatUserPage", adminController.pickOperatUser(Alexandr, model));
-    }
-
-    @Test
-    @WithUserDetails("Alexey")
-    public void trueDeleteUserOrNotTest() {
-        User Alexandr = new User();
-        Alexandr.setId(3L);
-
-        Assert.assertEquals("deleteUserOrNotPage", adminController.deleteUserOrNot(Alexandr));
-    }
-
-    @Test
-    public void trueUserServiceAddUserTest() {
-        User Eugene = new User();
-        Eugene.setUsername("Eugene");
-        Eugene.setPassword("555555");
-
-        Assert.assertTrue(userService.addUser(Eugene));
-    }
-
-    @Test
-    public void badUserServiceAddUserTest() {
-        User Alexandr = new User();
-        Alexandr.setUsername("Alexandr");
-
-        Assert.assertFalse(userService.addUser(Alexandr));
-    }
+//    @Autowired
+//    private MainController mainController;
+//
+//    @Autowired
+//    private ControllerStatus controllerStatus;
+//
+//    @Autowired
+//    private AdminController adminController;
+//
+//    @Autowired
+//    private UserService userService;
+//
+//    @MockBean
+//    private Model model;
+//
+//    @MockBean
+//    private BindingResult bindingResult;
+//
+//    @Test
+//    public void truePickNumForEditTest() {
+//        TableInfo tableInfo = new TableInfo();
+//        User user = new User();
+//
+//        tableInfo.setNumber(1);
+//        user.setUsername("Alexandr");
+//
+//        Assert.assertEquals("editElemPage", mainController.getEditElemPage(user,tableInfo, bindingResult, model));
+//    }
+//
+//    @Test
+//    public void truePickNumForDayListTest() {
+//        User Alexandr = new User();
+//        Alexandr.setUsername("Alexandr");
+//
+//        String dayField = "01.12.2020";
+//
+//        Assert.assertEquals("showDayListPage", controllerStatus.showDayList(dayField, model, Alexandr));
+//    }
+//
+//    @Test
+//    @WithUserDetails("Alexey")
+//    public void truePickUserByAdminTest() {
+//        User Alexandr = new User();
+//        Alexandr.setUsername("Alexandr");
+//
+//        Assert.assertEquals("pickOperatUserPage", adminController.pickOperatUser(Alexandr, model));
+//    }
+//
+//    @Test
+//    @WithUserDetails("Alexey")
+//    public void trueDeleteUserOrNotTest() {
+//        User Alexandr = new User();
+//        Alexandr.setId(3L);
+//
+//        Assert.assertEquals("deleteUserOrNotPage", adminController.deleteUserOrNot(Alexandr));
+//    }
+//
+//    @Test
+//    public void trueUserServiceAddUserTest() {
+//        User Eugene = new User();
+//        Eugene.setUsername("Eugene");
+//        Eugene.setPassword("555555");
+//
+//        Assert.assertTrue(userService.addUser(Eugene));
+//    }
+//
+//    @Test
+//    public void badUserServiceAddUserTest() {
+//        User Alexandr = new User();
+//        Alexandr.setUsername("Alexandr");
+//
+//        Assert.assertFalse(userService.addUser(Alexandr));
+//    }
 }

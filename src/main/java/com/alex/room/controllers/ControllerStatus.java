@@ -39,7 +39,8 @@ public class ControllerStatus {
     @GetMapping("/showAllList")
     public String showAllList(Model model, @ModelAttribute("pickedUser") User user) {
 
-        List<TableInfo> tableInfoIterable = tableInfoRepo.findByUsername(user.getUsername());
+//        List<TableInfo> tableInfoIterable = tableInfoRepo.findByUsername(user.getUsername());
+        List<TableInfo> tableInfoIterable = tableInfoRepo.findByUser(user);
         tableInfoIterable.sort(Comparator.comparing(TableInfo::getNumber));
         model.addAttribute("EntireListElem", tableInfoIterable);
         return "AllListStatPage";
@@ -72,11 +73,11 @@ public class ControllerStatus {
         }
 
         LocalDate pickedDateLocalDateType = LocalDate.parse(dayField, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        List<TableInfo> listWithoutTail = tableInfoRepo.findByTypeDateNextRepAndUsername(pickedDateLocalDateType, user.getUsername());
+        List<TableInfo> listWithoutTail = tableInfoRepo.findByTypeDateNextRepAndUser(pickedDateLocalDateType, user);
         model.addAttribute("DayListWithoutTail", listWithoutTail);
 
 
-        List<TableInfo> listWithTail = tableInfoRepo.findByUsernameAndTypeDateNextRepIsLessThanEqual(user.getUsername(), pickedDateLocalDateType);
+        List<TableInfo> listWithTail = tableInfoRepo.findByUserAndTypeDateNextRepIsLessThanEqual(user, pickedDateLocalDateType);
         listWithTail.removeAll(listWithoutTail);
 
         model.addAttribute("DayListWithTail", listWithTail);
@@ -88,7 +89,7 @@ public class ControllerStatus {
     @GetMapping("/showAVGAccuracy")
     public String showAVGAccuracy(Map<String, Object> model, @ModelAttribute("pickedUser") User user) {
 
-        Integer avgAccuracy = tableInfoRepo.countAvgPercentFalse(user.getUsername());
+        Integer avgAccuracy = tableInfoRepo.countAvgPercentFalse(user);
         if (avgAccuracy == null) {
             return "AvgAccuracyPage";
         }
@@ -99,13 +100,13 @@ public class ControllerStatus {
     @GetMapping("/showStageAccuracy")
     public String showStageAccuracy(Map<String, Object> model, @ModelAttribute("pickedUser") User user) {
 
-        List<Stats> groupByStage = tableInfoRepo.findTableInfoCount(user.getUsername());
+        List<Stats> groupByStage = tableInfoRepo.findTableInfoCount(user);
 
         if (groupByStage == null) {
             return "StageAccuracyPage";
         }
 
-        model.put("GroupByStage", tableInfoRepo.findTableInfoCount(user.getUsername()));
+        model.put("GroupByStage", tableInfoRepo.findTableInfoCount(user));
         return "StageAccuracyPage";
     }
 
@@ -113,14 +114,14 @@ public class ControllerStatus {
     public String showElemInStages(Map<String, Object> model, @ModelAttribute("pickedUser") User user) {
 
         List<TableInfo> tableInfoList = new ArrayList<>();
-        Integer topStage = tableInfoRepo.findMaxStage(user.getUsername());
+        Integer topStage = tableInfoRepo.findMaxStage(user);
 
         if (topStage == null) {
             return "ElemInStagesPage";
         }
 
         for (int i = 1; i <= topStage; i++) {
-            tableInfoList.addAll(tableInfoRepo.findByStageAndUsername(i, user.getUsername()));
+            tableInfoList.addAll(tableInfoRepo.findByStageAndUser(i, user));
         }
 
         model.put("ElemInStage", tableInfoList);

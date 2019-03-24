@@ -23,7 +23,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@Valid User user, BindingResult bindingResult, Model model) {
+    public String addUser(@Valid User user, BindingResult bindingResult, Model model, String radioRole) {
 
         if(bindingResult.hasErrors()) {
             ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
@@ -31,7 +31,7 @@ public class RegistrationController {
             return "registrationPage";
         }
 
-        if (!userService.addUser(user)) {
+        if (!userService.addUser(user, radioRole)) {
             model.addAttribute("usernameError", "User " + user.getUsername() +" exists.");
             return "registrationPage";
         }

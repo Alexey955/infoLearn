@@ -19,38 +19,38 @@ public class ControllerUtils {
         return bindingResult.getFieldErrors().stream().collect(collector);
     }
 
-    static void addErrorToModelIfBindingResultError(BindingResult bindingResult, Model model) {
+    public static void addErrorToModelIfBindingResultError(BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
             model.mergeAttributes(errorsMap);
         }
     }
 
-    static void addErrorToModelIfNumberExists(TableInfo tableInfoValid, Model model) {
+    public static void addErrorToModelIfNumberExists(TableInfo tableInfoValid, Model model) {
         if(tableInfoValid != null) {
             model.addAttribute("numberError", "Number " + tableInfoValid.getNumber() + " exists.");
         }
     }
 
-    static void addErrorToModelIfNumberDoesntExist(TableInfo tableInfoValid, int numDoesntExist, Model model) {
+    public static void addErrorToModelIfNumberDoesntExist(TableInfo tableInfoValid, int numDoesntExist, Model model) {
         if(tableInfoValid == null) {
             model.addAttribute("numberError", "Number " + numDoesntExist + " doesn't exist.");
         }
     }
 
-    static void addErrorIfMistakesTooLarge(int amountElements, TableInfo tableInfo, Model model) {
+    public static void addErrorIfMistakesTooLarge(int amountElements, TableInfo tableInfo, Model model) {
         if (amountElements < tableInfo.getAmountMistakes()) {
             model.addAttribute("amountMistakesError", "Amount of mistakes are too large.");
         }
     }
 
-    static void addErrorIfDateMoreThanToday(LocalDate dateForTestCorrect, LocalDate nowadays, Model model) {
+    public static void addErrorIfDateMoreThanToday(LocalDate dateForTestCorrect, LocalDate nowadays, Model model) {
         if (dateForTestCorrect.isAfter(nowadays)) {
             model.addAttribute("datePriorRepError", "More than today.");
         }
     }
 
-    static void addErrorIfDateLessThanToday(LocalDate dateForTestCorrect, LocalDate nowadays, Model model) {
+    public static void addErrorIfDateLessThanToday(LocalDate dateForTestCorrect, LocalDate nowadays, Model model) {
         if (dateForTestCorrect.isBefore(nowadays)) {
             model.addAttribute("dateNextRepError", "Less than today.");
         }

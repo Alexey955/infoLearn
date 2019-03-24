@@ -1,9 +1,6 @@
 package com.alex.room.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
@@ -34,7 +31,11 @@ public class TableInfo {
     private String dateNextRep;
     private LocalDate typeDatePriorRep;
     private LocalDate typeDateNextRep;
-    private String username;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     private Integer percentFalse;
 
 
@@ -42,7 +43,7 @@ public class TableInfo {
     }
 
     public TableInfo(Integer number, Integer amountElem, Integer amountMistakes, Integer percentFalse, String datePriorRep,
-                     String dateNextRep, Integer stage, String username) {
+                     String dateNextRep, Integer stage) {
 
         this.number = number;
         this.amountElem = amountElem;
@@ -51,7 +52,6 @@ public class TableInfo {
         this.datePriorRep = datePriorRep;
         this.dateNextRep = dateNextRep;
         this.stage = stage;
-        this.username = username;
 
         this.typeDatePriorRep = LocalDate.parse(datePriorRep, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
         this.typeDateNextRep = LocalDate.parse(dateNextRep, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
@@ -129,19 +129,19 @@ public class TableInfo {
         this.typeDateNextRep = typeDateNextRep;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String user) {
-        this.username = user;
-    }
-
     public Integer getAmountMistakes() {
         return amountMistakes;
     }
 
     public void setAmountMistakes(Integer amountMistakes) {
         this.amountMistakes = amountMistakes;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

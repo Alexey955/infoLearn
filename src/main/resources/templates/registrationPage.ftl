@@ -27,6 +27,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td align="center">
+                        <h4>User:<input form="registerForm" type="radio" value="USER" name="radioRole" checked = ""/></h4>
+                    </td>
+                    <td align="center">
+                        <h4>Admin:<input form="registerForm" type="radio" value="ADMIN" name="radioRole"/></h4>
+                    </td>
+                </tr>
+                <tr>
                     <td width="119px">
                         <button form="toLoginPage" class="buttLogPage">Back</button>
                     </td>

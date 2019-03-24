@@ -26,18 +26,25 @@ public class UserService implements UserDetailsService {
         return userRepo.findByUsername(username);
     }
 
-    public boolean addUser(User user) {
+    public boolean addUser(User user, String role) {
         User userFromDb = userRepo.findByUsername(user.getUsername());
 
-        if (userFromDb != null) {
+        if(userFromDb != null) {
             return false;
         }
 
-        user.setRoles(Collections.singleton(Roles.USER));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
-        userRepo.save(user);
-
+        switch (Roles.valueOf(role)){
+            case USER:
+                user.setRoles(Collections.singleton(Roles.USER));
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                userRepo.save(user);
+                break;
+            case ADMIN:
+                user.setRoles(Collections.singleton(Roles.ADMIN));
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                userRepo.save(user);
+                break;
+        }
         return true;
     }
 }

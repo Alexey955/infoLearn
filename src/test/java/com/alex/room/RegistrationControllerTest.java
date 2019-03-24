@@ -35,6 +35,7 @@ public class RegistrationControllerTest {
         MockHttpServletRequestBuilder multipart = multipart("/registration")
                 .param("username", "Username")
                 .param("password", "Password")
+                .param("radioRole", "USER")
                 .with(csrf());
 
         this.mockMvc.perform(multipart)

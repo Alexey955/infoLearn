@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,6 +28,18 @@ public class User implements UserDetails{
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Roles> roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private Set<TableInfo> tableInfoSet = new HashSet<TableInfo>();
+
+    public User(){}
+
+    public User(Long id, String username, String password, Roles roles){
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.roles = Collections.singleton(roles);
+    }
 
     public Long getId() {
         return id;
