@@ -1,6 +1,7 @@
 package com.alex.room.controllers;
 
 import com.alex.room.domain.User;
+import com.alex.room.service.RegistrationService;
 import com.alex.room.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RegistrationService registrationService;
+
     @GetMapping("/registration")
     public String registration() {
         return "registrationPage";
@@ -25,17 +29,18 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(@Valid User user, BindingResult bindingResult, Model model, String radioRole) {
 
-        if(bindingResult.hasErrors()) {
-            ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
-
-            return "registrationPage";
-        }
-
-        if (!userService.addUser(user, radioRole)) {
-            model.addAttribute("usernameError", "User " + user.getUsername() +" exists.");
-            return "registrationPage";
-        }
-
-        return "redirect:/login";
+        return registrationService.addUser(user, bindingResult, model, radioRole);
+//        if(bindingResult.hasErrors()) {
+//            ControllerUtils.addErrorToModelIfBindingResultError(bindingResult, model);
+//
+//            return "registrationPage";
+//        }
+//
+//        if (!userService.addUser(user, radioRole)) {
+//            model.addAttribute("usernameError", "User " + user.getUsername() +" exists.");
+//            return "registrationPage";
+//        }
+//
+//        return "redirect:/login";
     }
 }

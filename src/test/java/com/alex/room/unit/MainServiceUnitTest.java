@@ -20,7 +20,7 @@ import utils.TestUtils;
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestPropertySource("/application-test.properties")
-@Sql(value = {"/create-user-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+@Sql(value = {"/create-user-before.sql", "/tableInfo-list-before.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 @Sql(value = {"/tableInfo-list-after.sql", "/create-user-after.sql"}, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
 public class MainServiceUnitTest {
 
@@ -39,22 +39,18 @@ public class MainServiceUnitTest {
         Assert.assertEquals(mainService.pickMainPage(TestUtils.admin, model), "adminMainPage");
     }
 
-//    @Test
-//    @WithUserDetails("Valery")
-//    public void addElement(){
-//        Assert.assertEquals(mainService.addElement(valery, tableInfo, bindingResult, model), "wallpaperPage");
-//
-//        ObjectError error = new ObjectError("error","Error message");
-//        bindingResult.addError(error);
-//        Assert.assertEquals(mainService.addElement(valery, tableInfoTwo, bindingResult, model), "addNewElemPage");
-//    }
+    @Test
+    @WithUserDetails("Valery")
+    public void addElement(){
+        Assert.assertEquals(mainService.addElement(TestUtils.valery, TestUtils.tableInfoFive, bindingResult, model), "wallpaperPage");
+
+        //Need to add BindingResult test
+    }
 
     @Test
     @WithUserDetails("Valery")
     public void deleteOneElement(){
         Assert.assertEquals(mainService.deleteOneElement(TestUtils.user, TestUtils.tableInfo, model), "deleteElemPage");
-
-        mainService.addElement(TestUtils.valery, TestUtils.tableInfo, bindingResult, model);
         Assert.assertEquals(mainService.deleteOneElement(TestUtils.valery, TestUtils.tableInfo, model), "wallpaperPage");
     }
 
@@ -90,37 +86,26 @@ public class MainServiceUnitTest {
     @Test
     @WithUserDetails("Valery")
     public void repeatElement(){
-//        ObjectError error = new ObjectError("error","Error message");
-//        bindingResult.addError(error);
-//        Assert.assertEquals(mainService.repeatElement(valery, tableInfoTwo, bindingResult, model), "pickElemRepeatPage");
 
-        mainService.addElement(TestUtils.valery, TestUtils.tableInfo, bindingResult, model);
-        Assert.assertEquals(mainService.repeatElement(TestUtils.valery, TestUtils.tableInfo, bindingResult, model), "wallpaperPage");
-        mainService.deleteOneElement(TestUtils.valery, TestUtils.tableInfo, model);
+        //Need to add BindingResult test
+
+        Assert.assertEquals(mainService.repeatElement(TestUtils.valery, TestUtils.tableInfoTwo, bindingResult, model), "wallpaperPage");
     }
 
     @Test
     public void getEditElemPage(){
-        Assert.assertEquals(mainService.getEditElemPage(TestUtils.valery, TestUtils.tableInfo, bindingResult, model), "pickElemForEditPage");
-
-        mainService.addElement(TestUtils.valery, TestUtils.tableInfo, bindingResult, model);
-        Assert.assertEquals(mainService.getEditElemPage(TestUtils.valery, TestUtils.tableInfo, bindingResult, model), "editElemPage");
-        mainService.deleteOneElement(TestUtils.valery, TestUtils.tableInfo, model);
+        Assert.assertEquals(mainService.getEditElemPage(TestUtils.valery, TestUtils.tableInfoNull, bindingResult, model), "pickElemForEditPage");
+        Assert.assertEquals(mainService.getEditElemPage(TestUtils.valery, TestUtils.tableInfoTwo, bindingResult, model), "editElemPage");
     }
 
     @Test
     public void editElement(){
-//        ObjectError error = new ObjectError("error","Error message");
-//        bindingResult.addError(error);
-//        Assert.assertEquals(mainService.repeatElement(valery, tableInfoTwo, bindingResult, model), "pickElemRepeatPage");
 
-        mainService.addElement(TestUtils.valery, TestUtils.tableInfo, bindingResult, model);
+        //Need to add BindingResult test
 
         Assert.assertEquals(mainService.editElement(TestUtils.valery, TestUtils.tableInfoErrorOne, bindingResult, model, 1), "editElemPage");
         Assert.assertEquals(mainService.editElement(TestUtils.valery, TestUtils.tableInfoErrorTwo, bindingResult, model, 1), "editElemPage");
         Assert.assertEquals(mainService.editElement(TestUtils.valery, TestUtils.tableInfoErrorTwo, bindingResult, model, 1), "editElemPage");
         Assert.assertEquals(mainService.editElement(TestUtils.valery, TestUtils.tableInfoTwo, bindingResult, model, 1), "wallpaperPage");
-
-        mainService.deleteOneElement(TestUtils.valery, TestUtils.tableInfoTwo, model);
     }
 }

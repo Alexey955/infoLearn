@@ -3,6 +3,7 @@ package com.alex.room.controllers;
 import com.alex.room.domain.User;
 import com.alex.room.repos.TableInfoRepo;
 import com.alex.room.repos.UserRepo;
+import com.alex.room.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,23 +24,27 @@ public class AdminController {
     @Autowired
     private TableInfoRepo tableInfoRepo;
 
+    @Autowired
+    private AdminService adminService;
+
     @GetMapping("/adminMain")
     public String adminMain() {
         return "adminMainPage";
     }
 
     @GetMapping("/showUserList")
-    public String showUserList(Map<String, Object> model) {
+    public String showUserList(Model model) {
 
-        List<User> userList = userRepo.findAll();
-
-        for(int i = 0; i < userList.size(); i++) {
-            if(userList.get(i).getRoles().iterator().next().toString().equals("ADMIN")) {
-                userList.remove(i);
-            }
-        }
-        model.put("userList", userList);
-        return "userListPage";
+        return adminService.showUserList(model);
+//        List<User> userList = userRepo.findAll();
+//
+//        for(int i = 0; i < userList.size(); i++) {
+//            if(userList.get(i).getRoles().iterator().next().toString().equals("ADMIN")) {
+//                userList.remove(i);
+//            }
+//        }
+//        model.put("userList", userList);
+//        return "userListPage";
     }
 
     @GetMapping("/pickOperatUser/{user}")
