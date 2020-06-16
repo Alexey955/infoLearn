@@ -1,0 +1,188 @@
+.bodyMain {
+    background-color: #688F58;
+ }
+
+#bodyAndy {
+    background-image: url("../images/done.png");
+    background-size: 100%;
+}
+
+.mainTable {
+    width: 770px;
+    margin-top: 131px;
+
+    border: 9px #885017 solid;
+    border-radius: 30px;
+    border-spacing: 0;
+
+}
+.bottSett {
+    border: 0px;
+}
+
+.trMainTable {
+    border-bottom: 7px #885017 solid;
+    background-color: #885017;
+}
+
+.bordBottBreak {
+    border-bottom: 0px;
+}
+
+.mainFrameId {
+    width: 534px;
+    height: 343px;
+    background-color: #BBCD9B;
+    background-size: 100%;
+}
+
+.tdFrame {
+    width: 564px;
+    border-left: 7px #885017 solid;
+    border-right: 7px #885017 solid;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #885017;
+}
+
+.buttons {
+    height: 45px;
+    width: 100%;
+    border-radius: 10px;
+    background: #F9E836;
+}
+
+.addNewInputs {
+    margin-left: 52px;
+}
+
+.addNewButton {
+    height: 45px;
+    width: 75px;
+    border-radius: 10px;
+    background: #F9E836;
+    position: fixed;
+    right: 11px;
+    bottom: 8px;
+}
+
+.delButton {
+    height: 45px;
+    width: 145px;
+    border-radius: 10px;
+    background: #F9E836;
+    position: fixed;
+    left: 11px;
+    bottom: 8px;
+}
+
+.delRadioForm {
+    position: fixed;
+    left: 11px;
+    bottom: 45px;
+}
+
+#inpTo {
+    position: fixed;
+    left: 180px;
+    top: 39px;
+    margin-right: 2px;
+    width: 130px;
+}
+
+#inpFrom {
+    width: 130px;
+    margin-right: 2px;
+}
+
+.inpDelWidth {
+    width: 117px;
+}
+
+#pickElemRepeatInp {
+    position: fixed;
+    bottom: 8px;
+    right: 100px;
+}
+
+.ElemRepeatInp {
+    width: 80px;
+}
+
+.inpEditPage {
+    width: 125px;
+}
+
+.editAndDelInp {
+    width: 97px;
+}
+
+.AVGAccuracyText {
+    position: absolute;
+    top: 120px;
+    left: 122px;
+}
+
+.inpLogPage {
+    width: 50px;
+}
+
+.tableLoginPage {
+    position: fixed;
+    top: 172px;
+    left: 520px;
+    width: 250px;
+    border: 9px #885017 solid;
+    border-radius: 30px;
+    background-color: #CDD699;
+    padding: 5px;
+}
+
+.buttLogPage {
+    width: 100%;
+    height: 35px;
+    border-radius: 10px;
+    background: #F9E836;
+}
+
+.inpTextLog {
+    width: 180px;
+    position: relative;
+    left: 18px;
+}
+
+#tableDelUser {
+    position: fixed;
+    top: 80px;
+    left: 142px;
+    width: 250px;
+    border: 9px #885017 solid;
+    border-radius: 30px;
+    background-color: #885017;
+    padding: 5px;
+}
+
+.trLoginPage {
+    width: 218px;
+    height: 60px;
+}
+
+.invalid-feedback {
+    color: darkred;
+}
+
+#h3EditElem {
+    margin-bottom: 8px;
+}
+
+.introTextIndent {
+    text-indent: 10px;
+}
+
+.margineRight {
+    margin-right: 15px;
+}
+
+.margineLeft {
+    margin-left: 15px;
+}

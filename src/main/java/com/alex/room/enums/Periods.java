@@ -1,7 +1,7 @@
 package com.alex.room.enums;
 
 public enum Periods {
-    One(0), Two(1), Three(3), Four(7), Five(14), Six(30), Seven(90);
+    ONE(0), TWO(1), THREE(3), FOUR(7), FIVE(14), SIX(30), SEVEN(90);
 
     private Integer dayAmount;
 
